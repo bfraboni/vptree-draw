@@ -1,8 +1,55 @@
 #include <iostream> 
-#include "vptree/vptree.hpp" 
+#include <random>
+
+#include "vptree.hpp" 
 #include "simple_svg_1.0.0.hpp" 
 
 using namespace svg;
+
+namespace svg
+{
+    class Arc : public Shape
+    {
+    public:
+        Arc(Point const & center, double diameter, double start, double end, 
+            Fill const & fill, Stroke const & stroke = Stroke())
+            : Shape(fill, stroke), center(center), radius(diameter / 2), start(start), end(end) { }
+
+        // arc example from : https://www.w3.org/TR/SVG/paths.html#PathDataEllipticalArcCommands 
+        // <path d="M 125,75 a100,50 0 ?,? 100,50" style="fill:none; stroke:red; stroke-width:6"/>
+        std::string toString(Layout const & layout) const
+        {
+            double sr = (start-90.0) * M_PI / 180.0;
+            Point ps(center.x + radius * std::cos(sr), center.y + radius * std::sin(sr));
+            
+            double se = (end-90.0) * M_PI / 180.0;
+            Point pe(center.x + radius * std::cos(se), center.y + radius * std::sin(se));
+            
+            std::stringstream ss;
+            ss << elemStart("path");
+            ss << "d=\"";
+            ss << "M";
+            ss << translateX(ps.x, layout) << "," << translateY(ps.y, layout);
+            ss << "A";
+            ss << translateScale(radius, layout) << "," << translateScale(radius, layout);
+            ss << " 0 ";
+            ss << (end - start <= 180.0 ? "0," : "1,");
+            ss << "0 ";
+            ss << translateX(pe.x, layout) << "," << translateY(pe.y, layout);
+            ss << "\" ";
+            ss << fill.toString(layout) << stroke.toString(layout) << emptyElemEnd();
+            return ss.str();
+        }
+        void offset(Point const & offset)
+        {
+            center.x += offset.x;
+            center.y += offset.y;
+        }
+    private:
+        Point center;
+        double radius, start, end;
+    };
+}
 
 void draw(const vpt::VpTree& vptree, svg::Document& doc)
 {
@@ -20,18 +67,68 @@ void draw(const vpt::VpTree& vptree, svg::Document& doc)
     }
 }   
 
+void drawVPTree(int node, Polygon area, Color color) 
+{
+    if(node == vpt::Node::Leaf)
+        return;
+
+    var inside = area;
+    var outside = area;
+    if (node.isRoot) 
+    {
+        var circle = new vppaper.Path.Circle(node.vp, node.mu);
+        node.circle = circle;
+        circle.strokeColor = color;
+        circle.strokeWidth = strokeWidth;
+
+        trash.push(circle);
+
+        inside = area.intersect(circle);
+        outside = area.subtract(circle);
+    } 
+    else 
+    {
+        var circle = new vppaper.Path.Circle(node.vp, node.mu);
+        var intersect = area.intersect(circle);
+        intersect.strokeColor = color;
+        intersect.strokeWidth = strokeWidth;
+
+        trash.push(intersect);
+        trash.push(circle);
+
+        inside = intersect;
+        outside = area.subtract(intersect);
+    }
+
+    color.hue += 10;
+    if (drawType != "all") 
+    {
+        vpsteps.push([node.left, inside, color]);
+        vpsteps.push([node.right, outside, color]);
+    } 
+    else 
+    {
+        drawVPTree(node.left, inside, color);
+        drawVPTree(node.right, outside, color);    
+    }
+}
+
 int main()
 {   
     int dx = 1000, dy = 1000;
     int scale = 1;
     Dimensions dimensions(dx, dy);
-    Document doc("vptree.svg", Layout(dimensions, Layout::BottomLeft, scale, Point(dx/2/scale, dy/2/scale)));
+    Document doc("vptree.svg", Layout(dimensions, Layout::BottomLeft, scale, Point(0, 0)));
 
     // // Red image border.
-    // Polygon border(Stroke(1, Color::Red));
-    // border << Point(0, 0) << Point(dimensions.width, 0) << Point(dimensions.width, dimensions.height) << Point(0, dimensions.height);
-    // doc << border;
+    Polygon border(Fill(Color(255, 255, 255)), Stroke());
+    border << Point(0, 0) << Point(dimensions.width, 0) << Point(dimensions.width, dimensions.height) << Point(0, dimensions.height);
+    doc << border;
 
+    // auto arc = Arc(Point(dx/2, dy/2), 250, 0, 90, Fill(Color(255, 0, 0)), Stroke(5, Color(0, 255, 0))) ;
+    auto arc = Arc(Point(dx/2, dy/2), 250, 0, 270, Fill(), Stroke(5, Color(0, 255, 0))) ;
+    // std::cout << arc.toString(Layout(dimensions, Layout::BottomLeft, scale, Point(0, 0))) << std::endl;
+    // doc << arc;
     // // Long notation.  Local variable is created, children are added to varaible.
     // LineChart chart(5.0);
     // Polyline polyline_a(Stroke(.5, Color::Blue));
@@ -58,13 +155,14 @@ int main()
 
     // doc << Rectangle(Point(70, 55), 20, 15, Color::Yellow);
 
-    auto points = std::vector<std::vector<double>>{
-        {0, 0, 1},
-        {1, 1, 1},
-        {2, 0, 0},
-        {-1, -1, 0},
-        {10, 0, 5}
-    };
+    int nb = 1000;
+    auto points = std::vector<std::vector<double>>(nb);
+    for(int i = 0; i < nb; ++i)
+    {
+        double x = drand48() * dx;
+        double y = drand48() * dy;
+        points[i] = std::vector<double>({x,y,0});
+    }
     
     vpt::VpTree t1(points); // create a tree
     
