@@ -1,8 +1,10 @@
 #include <iostream> 
 #include <random>
+#include <cassert>
 
 #include "vptree.hpp" 
 #include "simple_svg_1.0.0.hpp" 
+#include "cavc/polylinecombine.hpp"
 
 using namespace svg;
 
@@ -49,6 +51,53 @@ namespace svg
         Point center;
         double radius, start, end;
     };
+
+    class CavcPoly : public Shape
+    {
+    public:
+        CavcPoly(const cavc::Polyline<double>& poly, Fill const & fill, Stroke const & stroke = Stroke())
+            : Shape(fill, stroke), poly(poly) { }
+
+        std::string toString(Layout const & layout) const
+        {
+            std::stringstream ss;
+            for( int i = 0; i < poly.size(); i++)
+            {
+                const auto& p1 = poly.vertexes()[i];
+                const auto& p2 = poly.vertexes()[(i+1)%poly.size()];
+
+                if(!p1.bulgeIsZero())
+                {
+                    auto arc = arcRadiusAndCenter(p1, p2);
+
+                    double start = (angle(arc.center, p1.pos()) + M_PI) * 180 / M_PI;
+                    double end = (angle(arc.center, p2.pos()) + M_PI) * 180 / M_PI;
+                    double radius = arc.radius;
+                    Point ps(p1.pos().x(), p1.pos().y());
+                    Point pe(p2.pos().x(), p2.pos().y());
+
+                    ss << elemStart("path");
+                    ss << "d=\"";
+                    ss << "M";
+                    ss << translateX(ps.x, layout) << "," << translateY(ps.y, layout);
+                    ss << "A";
+                    ss << translateScale(radius, layout) << "," << translateScale(radius, layout);
+                    ss << " 0 ";
+                    ss << (end - start <= 180.0 ? "0," : "1,");
+                    // ss << "0,";
+                    ss << "0 ";
+                    ss << translateX(pe.x, layout) << "," << translateY(pe.y, layout);
+                    ss << "\" ";
+                    ss << fill.toString(layout) << stroke.toString(layout) << emptyElemEnd();
+                }
+            }
+
+            return ss.str();
+        }
+        void offset(Point const & offset) { }
+    private:
+        const cavc::Polyline<double>& poly;
+    };
 }
 
 void draw(const vpt::VpTree& vptree, svg::Document& doc)
@@ -56,35 +105,56 @@ void draw(const vpt::VpTree& vptree, svg::Document& doc)
     for(int i = 0; i < vptree.items_.size(); i++)
     {
         const auto& point = vptree.items_[i].first;
-        doc << Circle(Point(point[0], point[1]), 1, Fill(), Stroke(1, Color(200, 250, 150)));
+        doc << Circle(Point(point[0], point[1]), 1, Fill(Color(0, 0, 0)), Stroke());
 
         // circle border
         int id = vptree.items_[i].second;
         const auto& node = vptree.nodes_[id];
-        doc << Circle(Point(point[0], point[1]), node.threshold, Fill(), Stroke(1, Color(100, 200, 120)));
+        doc << Circle(Point(point[0], point[1]), 2*node.threshold, Fill(), Stroke(1, Color(125, 125, 125)));
 
         // doc << Circle(Point(point[0], point[1]), 1, Fill(Color(100, 200, 120)), Stroke(1, Color(200, 250, 150)));
     }
 }   
 
-void drawVPTree(int node, Polygon area, Color color) 
+/*
+void drawVPTree(int node, const cavc::Polyline<double>& path, const svg::Color& color) 
 {
     if(node == vpt::Node::Leaf)
         return;
 
-    var inside = area;
-    var outside = area;
-    if (node.isRoot) 
+    auto inside = area;
+    auto outside = area;
+
+    if( node == 0 ) 
     {
-        var circle = new vppaper.Path.Circle(node.vp, node.mu);
+        // construct new circle
+        const auto& n = vptree.nodes_[node];
+        double radius = n.threshold;
+        double cx =  vptree.items_[n.item][0];
+        double cy =  vptree.items_[n.item][1];
+
+        // closed polyline representing a circle
+        cavc::Polyline<double> circle;
+        circle.addVertex(cx-radius, cy, radius);
+        circle.addVertex(cx+radius, cy, radius);
+        circle.isClosed() = true;
+
+        // draw circle
+
+        // compute intersection with enclosing path
         node.circle = circle;
         circle.strokeColor = color;
         circle.strokeWidth = strokeWidth;
 
         trash.push(circle);
 
-        inside = area.intersect(circle);
-        outside = area.subtract(circle);
+        inside = path.intersect(circle);
+        outside = path.subtract(circle);
+
+
+//     cavc::CombineResult<double> unionResult = combinePolylines(circle, rectangle, PlineCombineMode::Union);
+//     cavc::CombineResult<double> excludeResult = combinePolylines(circle, rectangle, PlineCombineMode::Exclude);
+//     cavc::CombineResult<double> intersectResult = combinePolylines(circle, rectangle, PlineCombineMode::Intersect);
     } 
     else 
     {
@@ -112,72 +182,142 @@ void drawVPTree(int node, Polygon area, Color color)
         drawVPTree(node.right, outside, color);    
     }
 }
+*/
+
+// using namespace cavc;
+
+// int main(int argc, char *argv[]) 
+// {
+//     (void)argc;
+//     (void)argv;
+
+//     // closed polyline representing a circle
+//     cavc::Polyline<double> circle;
+//     circle.addVertex(0, 1, 1);
+//     circle.addVertex(10, 1, 1);
+//     circle.isClosed() = true;
+
+//     // closed polyline representing a rectangle (overlaps with the circle)
+//     cavc::Polyline<double> rectangle;
+//     rectangle.addVertex(3, -10, 0);
+//     rectangle.addVertex(6, -10, 0);
+//     rectangle.addVertex(6, 10, 0);
+//     rectangle.addVertex(3, 10, 0);
+//     rectangle.isClosed() = true;
+
+//     cavc::CombineResult<double> unionResult = combinePolylines(circle, rectangle, PlineCombineMode::Union);
+//     cavc::CombineResult<double> excludeResult = combinePolylines(circle, rectangle, PlineCombineMode::Exclude);
+//     cavc::CombineResult<double> intersectResult = combinePolylines(circle, rectangle, PlineCombineMode::Intersect);
+//     cavc::CombineResult<double> xorResult = combinePolylines(circle, rectangle, PlineCombineMode::XOR);
+
+//     return 0;
+// }
 
 int main()
 {   
+    srand(1234);
+
     int dx = 1000, dy = 1000;
     int scale = 1;
     Dimensions dimensions(dx, dy);
-    Document doc("vptree.svg", Layout(dimensions, Layout::BottomLeft, scale, Point(0, 0)));
+    Layout layout(dimensions, Layout::BottomLeft, scale, Point(0, 0));
+    Document doc("vptree.svg", layout);
 
-    // // Red image border.
+    // background.
     Polygon border(Fill(Color(255, 255, 255)), Stroke());
     border << Point(0, 0) << Point(dimensions.width, 0) << Point(dimensions.width, dimensions.height) << Point(0, dimensions.height);
     doc << border;
 
     // auto arc = Arc(Point(dx/2, dy/2), 250, 0, 90, Fill(Color(255, 0, 0)), Stroke(5, Color(0, 255, 0))) ;
-    auto arc = Arc(Point(dx/2, dy/2), 250, 0, 270, Fill(), Stroke(5, Color(0, 255, 0))) ;
-    // std::cout << arc.toString(Layout(dimensions, Layout::BottomLeft, scale, Point(0, 0))) << std::endl;
+    // auto arc = Arc(Point(dx/2, dy/2), 250, 0, 270, Fill(), Stroke(5, Color(0, 255, 0))) ;
+    // std::cout << arc.toString(layout) << std::endl;
     // doc << arc;
-    // // Long notation.  Local variable is created, children are added to varaible.
-    // LineChart chart(5.0);
-    // Polyline polyline_a(Stroke(.5, Color::Blue));
-    // Polyline polyline_b(Stroke(.5, Color::Aqua));
-    // Polyline polyline_c(Stroke(.5, Color::Fuchsia));
-    // polyline_a << Point(0, 0) << Point(10, 30) << Point(20, 40) << Point(30, 45) << Point(40, 44);
-    // polyline_b << Point(0, 10) << Point(10, 22) << Point(20, 30) << Point(30, 32) << Point(40, 30);
-    // polyline_c << Point(0, 12) << Point(10, 15) << Point(20, 14) << Point(30, 10) << Point(40, 2);
-    // chart << polyline_a << polyline_b << polyline_c;
-    // doc << chart;
 
-    // // Condensed notation, parenthesis isolate temporaries that are inserted into parents.
-    // doc << (LineChart(Dimensions(65, 5))
-    //     << (Polyline(Stroke(.5, Color::Blue)) << Point(0, 0) << Point(10, 8) << Point(20, 13))
-    //     << (Polyline(Stroke(.5, Color::Orange)) << Point(0, 10) << Point(10, 16) << Point(20, 20))
-    //     << (Polyline(Stroke(.5, Color::Cyan)) << Point(0, 5) << Point(10, 13) << Point(20, 16)));
-
-    // doc << Circle(Point(80, 80), 20, Fill(Color(100, 200, 120)), Stroke(1, Color(200, 250, 150)));
-
-    // doc << Text(Point(5, 77), "Simple SVG", Color::Silver, Font(10, "Verdana"));
-
-    // doc << (Polygon(Color(200, 160, 220), Stroke(.5, Color(150, 160, 200))) << Point(20, 70)
-    //     << Point(25, 72) << Point(33, 70) << Point(35, 60) << Point(25, 55) << Point(18, 63));
-
-    // doc << Rectangle(Point(70, 55), 20, 15, Color::Yellow);
-
+    // init random points
     int nb = 1000;
     auto points = std::vector<std::vector<double>>(nb);
     for(int i = 0; i < nb; ++i)
     {
-        double x = drand48() * dx;
-        double y = drand48() * dy;
+        double x = drand48() * dx/2 + dx/4;
+        double y = drand48() * dy/2 + dy/4;
         points[i] = std::vector<double>({x,y,0});
     }
-    
-    vpt::VpTree t1(points); // create a tree
-    
-    std::vector<double> distances;
-    std::vector<int> indices;
-    std::tie(distances, indices) = t1.getNearestNeighbors({ 0, 0, 0 }, 3); // find 3 neighbors closest to the given point
-    
-    std::cout << distances[0] << "\n"; // prints 0
-    std::cout << indices[0] << "\n"; // prints 1
-    
-    auto batch = t1.getNearestNeighborsBatch({{0, 0, 0}, {1, 1, 1}, {0.5, 0.5, 0.5}}, 3); // split the work between threads
-    std::cout << (int)(batch.first[0] == distances) << std::endl; // true
-    std::cout << (int)(batch.second[0] == indices) << std::endl; // true
 
-    draw(t1, doc);
+    // create a vantage points tree
+    vpt::VpTree t1(points);
+
+    // draw vptree to svg
+    // draw(t1, doc);
+
+    // test draw path intersection
+
+    //doc << Circle(Point(dx/2, dy/2), dx, Fill(), Stroke(10, Color(255, 0, 255)));
+    auto n = t1.root();
+    auto p = t1.items_[n.item].first;
+    double diam = 2 * n.threshold;
+    //doc << Circle(Point(p[0], p[1]), diam, Fill(), Stroke(10, Color(0, 255, 0))); 
+    //doc << Circle(Point(p[0], p[1]), 10, Fill(Color(0, 255, 0)), Stroke());
+    
+
+    // closed polyline representing a circle
+    cavc::Polyline<double> circle1;
+    circle1.addVertex(150-150, 150, 1);
+    circle1.addVertex(150+150, 150, 1);
+    circle1.isClosed() = true;
+
+    cavc::Polyline<double> circle2;
+    circle2.addVertex(0, dy/2, 1);
+    circle2.addVertex(dx, dy/2, 1);
+    circle2.isClosed() = true;
+
+    cavc::CombineResult<double> excludeResult = combinePolylines(circle2, circle1, cavc::PlineCombineMode::Exclude);
+    cavc::CombineResult<double> intersectResult = combinePolylines(circle2, circle1, cavc::PlineCombineMode::Intersect);
+
+    std::cout << "intersect: " << intersectResult.remaining.size() << std::endl;
+    std::cout << " remains " << intersectResult.subtracted.size() << " holes " << std::endl;
+    std::cout << "exclude: " << excludeResult.remaining.size() << std::endl;
+    std::cout << " remains " << excludeResult.subtracted.size() << " holes " << std::endl;
+
+    // for(const auto& pl : intersectResult.remaining)
+    // {
+    //     doc << svg::CavcPoly(pl, Fill( Color(200, 200, 200) ), Stroke(2, Color(0, 0, 0)));
+    // }
+    // for(const auto& pl : intersectResult.subtracted)
+    // {
+    //     doc << svg::CavcPoly(pl, Fill( Color(100, 100, 100) ), Stroke(2, Color(0, 0, 0)));
+    // }
+
+    for(const auto& pl : excludeResult.remaining)
+    {
+        auto svgpl = svg::CavcPoly(pl, Fill(), Stroke(2, Color(0, 0, 0)));
+        doc << svgpl;
+        std::cout << svgpl.toString(layout) << std::endl;
+    }
+
+    for(const auto& pl : excludeResult.subtracted)
+    {
+        auto svgpl = svg::CavcPoly(pl, Fill(), Stroke(2, Color(0, 0, 255)));
+        doc << svgpl;
+        std::cout << svgpl.toString(layout) << std::endl;
+    }
+
+    // n = t1.nodes_[t1.nodes_[0].left];
+    // radius = 2 * n.threshold;
+    // cx =  t1.items_[n.item].first[0];
+    // cy =  t1.items_[n.item].first[1];
+    // circle = Circle(Point(cx, cy), radius, Fill(), Stroke(5, Color(255, 0, 0)));
+    // doc << circle;
+    // doc << Circle(Point(cx, cy), 4, Fill(Color(255, 0, 0)), Stroke());
+    
+    // n = t1.nodes_[t1.nodes_[0].right];
+    // radius = 2 * n.threshold;
+    // cx =  t1.items_[n.item].first[0];
+    // cy =  t1.items_[n.item].first[1];
+    // circle = Circle(Point(cx, cy), radius, Fill(), Stroke(5, Color(0, 0, 255)));
+    // doc << circle;
+    // doc << Circle(Point(cx, cy), 4, Fill(Color(0, 0, 255)), Stroke());
+
+    // save svg
     doc.save();
 
     return 0;
