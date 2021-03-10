@@ -83,9 +83,10 @@ namespace svg
                     ss << "A";
                     ss << translateScale(radius, layout) << "," << translateScale(radius, layout);
                     ss << " 0 ";
-                    ss << (end - start <= 180.0 ? "0," : "1,");
-                    // ss << "0,";
-                    ss << "0 ";
+                    // ss << (end - start <= 180.0 ? "1," : "0,");
+                    ss << "0,";
+                    // ss << "1 ";
+                    ss << (p1.bulge() > 0 ? "0," : "1,");;
                     ss << translateX(pe.x, layout) << "," << translateY(pe.y, layout);
                     ss << "\" ";
                     ss << fill.toString(layout) << stroke.toString(layout) << emptyElemEnd();
@@ -278,10 +279,10 @@ int main()
     std::cout << "exclude: " << excludeResult.remaining.size() << std::endl;
     std::cout << " remains " << excludeResult.subtracted.size() << " holes " << std::endl;
 
-    // for(const auto& pl : intersectResult.remaining)
-    // {
-    //     doc << svg::CavcPoly(pl, Fill( Color(200, 200, 200) ), Stroke(2, Color(0, 0, 0)));
-    // }
+    for(const auto& pl : intersectResult.remaining)
+    {
+        doc << svg::CavcPoly(pl, Fill(), Stroke(2, Color(0, 0, 0)));
+    }
     // for(const auto& pl : intersectResult.subtracted)
     // {
     //     doc << svg::CavcPoly(pl, Fill( Color(100, 100, 100) ), Stroke(2, Color(0, 0, 0)));
