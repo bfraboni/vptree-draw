@@ -214,18 +214,18 @@ namespace svg
                 ss << "rgb(" << red << "," << green << "," << blue << ")";
             return ss.str();
         }
-    private:
-            bool transparent;
-            int red;
-            int green;
-            int blue;
+    public:
+        bool transparent;
+        int red;
+        int green;
+        int blue;
 
-            void assign(int r, int g, int b)
-            {
-                red = r;
-                green = g;
-                blue = b;
-            }
+        void assign(int r, int g, int b)
+        {
+            red = r;
+            green = g;
+            blue = b;
+        }
     };
 
     class Fill : public Serializeable

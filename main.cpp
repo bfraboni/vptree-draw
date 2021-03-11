@@ -123,75 +123,104 @@ void draw(const vpt::VpTree& vptree, svg::Document& doc)
     }
 }   
 
+svg::Color rotate(const svg::Color& color, int hue) 
+{
+    const float cosA = std::cos((hue%360) * M_PI / 180.f);
+    const float sinA = std::sin((hue%360) * M_PI / 180.f);
+    const float neo[3] = {
+        cosA + (1 - cosA) / 3,
+        (1 - cosA) / 3 - std::sqrt(1.f / 3.f) * sinA,
+        (1 - cosA) / 3 + std::sqrt(1.f / 3.f) * sinA,
+    };
+    const int rgb[3] = {color.red, color.green, color.blue};
+    const int res[3] = {
+        std::min(255, std::max(0, (int)(rgb[0] * neo[0] + rgb[1] * neo[1] + rgb[2] * neo[2]))),
+        std::min(255, std::max(0, (int)(rgb[0] * neo[2] + rgb[1] * neo[0] + rgb[2] * neo[1]))),
+        std::min(255, std::max(0, (int)(rgb[0] * neo[1] + rgb[1] * neo[2] + rgb[2] * neo[0]))),
+    };
+    return svg::Color(res[0], res[1], res[2]);
+}
+
 struct Cell
 {
     std::vector<cavc::Polyline<double>> shape;
     std::vector<cavc::Polyline<double>> holes;
 };
 
-void drawVPTree(const vpt::VpTree& vptree, int depth, int node, const Cell& cell, const svg::Color& color, svg::Document& doc) 
+void drawVPTree(const vpt::VpTree& vptree, int depth, int node, const Cell& cell, svg::Document& doc) 
 {
     if(node == vpt::VpTree::Node::Leaf)
         return;
 
-    // construct cell vantage circle
+    // get cell vantage circle info
     const auto& n = vptree.nodes_[node];
     double radius = n.threshold;
     double cx = vptree.items_[n.item].first[0];
     double cy = vptree.items_[n.item].first[1];
 
-    // closed polyline of the vantage circle
-    cavc::Polyline<double> circle;
-    circle.addVertex(cx-radius, cy, 1);
-    circle.addVertex(cx+radius, cy, 1);
-    circle.isClosed() = true;
-
+    std::cout << "depth: " << depth << " " << node << " " << n.left << " " << n.right << std::endl;
     std::cout << "circle: " << cx << " " << cy << " " << radius << std::endl;
 
-    // compute intersection with enclosing path
-    Cell inside;
-    for(int i = 0; i < cell.shape.size(); ++i)
+    // on a leaf
+    if( radius <= 0 )
     {
-        cavc::CombineResult<double> inter = combinePolylines(circle, cell.shape[i], cavc::PlineCombineMode::Intersect);
-        std::cout << "intersect: " << inter.remaining.size() << " remains " << inter.subtracted.size() << " holes " << std::endl;
-        if( inter.remaining.size() > 0 )
-        {
-            inside.shape.insert(inside.shape.end(), inter.remaining.begin(), inter.remaining.end());
-        }
-    }
-
-    // compute exclusion with enclosing path
-    Cell outside;
-    for(int i = 0; i < cell.shape.size(); ++i)
-    {
-        cavc::CombineResult<double> exclu = combinePolylines(cell.shape[i], circle, cavc::PlineCombineMode::Exclude);
-        std::cout << "exclude: " << exclu.remaining.size() << " remains " << exclu.subtracted.size() << " holes " << std::endl;
-        if( exclu.remaining.size() > 0 )
-        {
-            outside.shape.insert(outside.shape.end(), exclu.remaining.begin(), exclu.remaining.end());
-        }
-    }
-
-    // draw inside path
-    for(int i = 0; i < inside.shape.size(); ++i)
-    {
-        auto svgpl = svg::CavcPoly(inside.shape[i], Fill(), Stroke(2, svg::Color::Defaults::Black));
+        // draw vantage point
+        svg::Color color = rotate(svg::Color::Defaults::Red, depth * 30);
+        auto svgpl = svg::Circle(svg::Point(cx, cy), 4, Fill(color), Stroke());
         doc << svgpl;
     }
-
-    // draw outside path
-    for(int i = 0; i < outside.shape.size(); ++i)
+    // on a node
+    else
     {
-        auto svgpl = svg::CavcPoly(outside.shape[i], Fill(), Stroke(2, svg::Color::Defaults::Black));
-        doc << svgpl;
+        // closed polyline of the vantage circle
+        cavc::Polyline<double> circle;
+        circle.addVertex(cx-radius, cy, 1);
+        circle.addVertex(cx+radius, cy, 1);
+        circle.isClosed() = true;
+
+        // compute intersection with enclosing path
+        Cell inside;
+        for(int i = 0; i < cell.shape.size(); ++i)
+        {
+            cavc::CombineResult<double> inter = combinePolylines(circle, cell.shape[i], cavc::PlineCombineMode::Intersect);
+            std::cout << "intersect: " << inter.remaining.size() << " remains " << inter.subtracted.size() << " holes " << std::endl;
+            if( inter.remaining.size() > 0 )
+            {
+                inside.shape.insert(inside.shape.end(), inter.remaining.begin(), inter.remaining.end());
+            }
+        }
+
+        // compute exclusion with enclosing path
+        Cell outside;
+        for(int i = 0; i < cell.shape.size(); ++i)
+        {
+            cavc::CombineResult<double> exclu = combinePolylines(cell.shape[i], circle, cavc::PlineCombineMode::Exclude);
+            std::cout << "exclude: " << exclu.remaining.size() << " remains " << exclu.subtracted.size() << " holes " << std::endl;
+            if( exclu.remaining.size() > 0 )
+            {
+                outside.shape.insert(outside.shape.end(), exclu.remaining.begin(), exclu.remaining.end());
+            }
+        }
+
+        // draw inside path
+        // svg::Color color = svg::Color::Defaults::Black;
+        svg::Color color = rotateRGBHue(svg::Color::Defaults::Red, depth * 30);
+        for(int i = 0; i < inside.shape.size(); ++i)
+        {
+            auto svgpl = svg::CavcPoly(inside.shape[i], Fill(), Stroke(2, color));
+            doc << svgpl;
+        }
+
+        // draw outside path
+        for(int i = 0; i < outside.shape.size(); ++i)
+        {
+            auto svgpl = svg::CavcPoly(outside.shape[i], Fill(), Stroke(2, color));
+            doc << svgpl;
+        }   
+        
+        drawVPTree(vptree, depth+1, n.left, inside, doc);
+        drawVPTree(vptree, depth+1, n.right, outside, doc); 
     }
-
-    if( depth + 1 >= 8 )
-        return;
-
-    // color.hue += 10;
-    drawVPTree(vptree, depth+1, n.left, inside, color, doc);
-    drawVPTree(vptree, depth+1, n.right, outside, color, doc);    
 }
 
 int main()
@@ -303,7 +332,7 @@ int main()
     // doc << Circle(Point(cx, cy), 4, Fill(Color(0, 0, 255)), Stroke());
     Cell cell;
     cell.shape.push_back(shape1);
-    drawVPTree(t1, 0, 0, cell, svg::Color(255,0,0), doc);
+    drawVPTree(t1, 0, 0, cell, doc);
 
     // save svg
     doc.save();
