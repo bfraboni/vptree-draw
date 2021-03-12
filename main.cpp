@@ -2,6 +2,7 @@
 #include <random>
 #include <set>
 #include <cassert>
+#include <set>
 
 #include "vptree.hpp" 
 #include "simple_svg_1.0.0.hpp" 
@@ -76,48 +77,46 @@ namespace svg
                 const auto& p1 = poly.vertexes()[i];
                 const auto& p2 = poly.vertexes()[(i+1)%poly.size()];
                   
-              Edge e = { p1.x(), p1.y(), p1.bulge(), p2.x(), p2.y(), p2.bulge()};
-              Edge ee = { p2.x(), p2.y(), p2.bulge(), p1.x(), p1.y(), p1.bulge()};
-              if ((std::find(edgeBuffer.begin(), edgeBuffer.end(), e) == edgeBuffer.end()) &&
-                  (std::find(edgeBuffer.begin(), edgeBuffer.end(), e) == edgeBuffer.end()))
-              {
-                
-                if(!p1.bulgeIsZero())
+                Edge e = { p1.x(), p1.y(), p1.bulge(), p2.x(), p2.y(), p2.bulge()};
+                Edge ee = { p2.x(), p2.y(), p2.bulge(), p1.x(), p1.y(), p1.bulge()};
+                if ((std::find(edgeBuffer.begin(), edgeBuffer.end(), e) == edgeBuffer.end()) &&
+                    (std::find(edgeBuffer.begin(), edgeBuffer.end(), e) == edgeBuffer.end()))
                 {
-                    // arc if bulge != 0
-                    auto arc = arcRadiusAndCenter(p1, p2);
-                    double start = (angle(arc.center, p1.pos()) + M_PI) * 180 / M_PI;
-                    double end = (angle(arc.center, p2.pos()) + M_PI) * 180 / M_PI;
-                    double radius = arc.radius;
-                    Point ps(p1.pos().x(), p1.pos().y());
-                    Point pe(p2.pos().x(), p2.pos().y());
+                    if(!p1.bulgeIsZero())
+                    {
+                        // arc if bulge != 0
+                        auto arc = arcRadiusAndCenter(p1, p2);
+                        double start = (angle(arc.center, p1.pos()) + M_PI) * 180 / M_PI;
+                        double end = (angle(arc.center, p2.pos()) + M_PI) * 180 / M_PI;
+                        double radius = arc.radius;
+                        Point ps(p1.pos().x(), p1.pos().y());
+                        Point pe(p2.pos().x(), p2.pos().y());
 
-                    ss << elemStart("path");
-                    ss << "d=\"";
-                    ss << "M";
-                    ss << translateX(ps.x, layout) << "," << translateY(ps.y, layout);
-                    ss << "A";
-                    ss << translateScale(radius, layout) << "," << translateScale(radius, layout);
-                    ss << " 0 ";
-                    // always small arcs -> large arc flag to 0
-                    ss << "0,";                           
-                    // sweep is 0 if bulge is positive, 1 if negative
-                    ss << (p1.bulge() > 0 ? "0," : "1,"); 
-                    ss << translateX(pe.x, layout) << "," << translateY(pe.y, layout);
-                    ss << "\" ";
-                    ss << fill.toString(layout) << stroke.toString(layout) << emptyElemEnd();
-                }
-                else
-                {
-                    // line if bulge == 0
-                    Path p(fill, stroke);
-                    p << svg::Point(p1.pos().x(), p1.pos().y()) << svg::Point(p2.pos().x(), p2.pos().y());
-                    ss << p.toString(layout);
-                }
+                        ss << elemStart("path");
+                        ss << "d=\"";
+                        ss << "M";
+                        ss << translateX(ps.x, layout) << "," << translateY(ps.y, layout);
+                        ss << "A";
+                        ss << translateScale(radius, layout) << "," << translateScale(radius, layout);
+                        ss << " 0 ";
+                        // always small arcs -> large arc flag to 0
+                        ss << "0,";                           
+                        // sweep is 0 if bulge is positive, 1 if negative
+                        ss << (p1.bulge() > 0 ? "0 " : "1 "); 
+                        ss << translateX(pe.x, layout) << "," << translateY(pe.y, layout);
+                        ss << "\" ";
+                        ss << fill.toString(layout) << stroke.toString(layout) << emptyElemEnd();
+                    }
+                    else
+                    {
+                        // line if bulge == 0
+                        Path p(fill, stroke);
+                        p << svg::Point(p1.pos().x(), p1.pos().y()) << svg::Point(p2.pos().x(), p2.pos().y());
+                        ss << p.toString(layout);
+                    }
                 
-                edgeBuffer.push_back(e);
-                
-              }
+                    edgeBuffer.push_back(e);
+                }
             }
 
             return ss.str();
@@ -129,24 +128,16 @@ namespace svg
     };
 }
 
-
-
-svg::Color rotate(const svg::Color& color, int hue) 
+svg::Color rotate( const svg::Color &in, float hue)
 {
-    const float cosA = std::cos((hue%360) * M_PI / 180.f);
-    const float sinA = std::sin((hue%360) * M_PI / 180.f);
-    const float neo[3] = {
-        cosA + (1 - cosA) / 3,
-        (1 - cosA) / 3 - std::sqrt(1.f / 3.f) * sinA,
-        (1 - cosA) / 3 + std::sqrt(1.f / 3.f) * sinA,
-    };
-    const int rgb[3] = {color.red, color.green, color.blue};
-    const int res[3] = {
-        std::min(255, std::max(0, (int)(rgb[0] * neo[0] + rgb[1] * neo[1] + rgb[2] * neo[2]))),
-        std::min(255, std::max(0, (int)(rgb[0] * neo[2] + rgb[1] * neo[0] + rgb[2] * neo[1]))),
-        std::min(255, std::max(0, (int)(rgb[0] * neo[1] + rgb[1] * neo[2] + rgb[2] * neo[0]))),
-    };
-    return svg::Color(res[0], res[1], res[2]);
+    float U = cos(hue*M_PI/180);
+    float W = sin(hue*M_PI/180);
+    const float rgb[3] = {in.red/255.f, in.green/255.f, in.blue/255.f};
+    float res[3];
+    res[0] = (.299+.701*U+.168*W)*rgb[0] + (.587-.587*U+.330*W)*rgb[1] + (.114-.114*U-.497*W)*rgb[2];
+    res[1] = (.299-.299*U-.328*W)*rgb[0] + (.587+.413*U+.035*W)*rgb[1] + (.114-.114*U+.292*W)*rgb[2];
+    res[2] = (.299-.3*U+1.25*W)*rgb[0] + (.587-.588*U-1.05*W)*rgb[1] + (.114+.886*U-.203*W)*rgb[2];
+    return svg::Color(res[0]*255.f, res[1]*255.f, res[2]*255.f);
 }
 
 struct Cell
@@ -155,9 +146,14 @@ struct Cell
     std::vector<cavc::Polyline<double>> holes;
 };
 
-
-void drawVPTree(const vpt::VpTree& vptree, int depth, int node, const Cell& cell,
-                std::vector<CavcPoly::Edge> &edgeBuffer, svg::Document& doc)
+void drawVPTree(
+    const vpt::VpTree& vptree, 
+    int depth, 
+    int node, 
+    const Cell& cell,
+    std::vector<CavcPoly::Edge> &edgeBuffer, 
+    svg::Document& doc
+)
 {
     if(node == vpt::VpTree::Node::Leaf)
         return;
@@ -175,8 +171,8 @@ void drawVPTree(const vpt::VpTree& vptree, int depth, int node, const Cell& cell
     if( radius <= 0 )
     {
         // draw vantage point
-        auto svgpl = svg::Circle(svg::Point(cx, cy), 4, Fill(svg::Color::Defaults::Black), Stroke());
-        doc << svgpl;
+        // auto svgpl = svg::Circle(svg::Point(cx, cy), 4, Fill(svg::Color::Defaults::Black), Stroke());
+        // doc << svgpl;
     }
     // on a node
     else
@@ -191,7 +187,7 @@ void drawVPTree(const vpt::VpTree& vptree, int depth, int node, const Cell& cell
         Cell inside;
         for(int i = 0; i < cell.shape.size(); ++i)
         {
-            cavc::CombineResult<double> inter = combinePolylines(circle, cell.shape[i], cavc::PlineCombineMode::Intersect);
+            cavc::CombineResult<double> inter = combinePolylines(cell.shape[i], circle, cavc::PlineCombineMode::Intersect);
             std::cout << "intersect: " << inter.remaining.size() << " remains " << inter.subtracted.size() << " holes " << std::endl;
             if( inter.remaining.size() > 0 )
             {
@@ -218,24 +214,29 @@ void drawVPTree(const vpt::VpTree& vptree, int depth, int node, const Cell& cell
             }
         }
 
-        // draw inside cell path
-        svg::Color color = rotate(svg::Color::Defaults::Red, depth * 30);
+        // hue rotated color 
+        svg::Color color = rotate(svg::Color(255,120,80), depth*30);
+        
+        // draw circle center
+        doc << svg::Circle(svg::Point(cx, cy), 4, Fill(color), Stroke());
+
+        // draw left subtree
+        drawVPTree(vptree, depth+1, n.left, inside, edgeBuffer, doc);
+
+        // draw left cell (inside)
         for(int i = 0; i < inside.shape.size(); ++i)
         {
-            auto svgpl = svg::CavcPoly(inside.shape[i], Fill(), edgeBuffer, Stroke(2, color));
-            doc << svgpl;
+            doc << svg::CavcPoly(inside.shape[i], Fill(), edgeBuffer, Stroke(2, color));
         }
 
-        // draw outside cell path
+        // draw right subtree
+        drawVPTree(vptree, depth+1, n.right, outside, edgeBuffer, doc);
+
+        // draw right cell (outside)
         for(int i = 0; i < outside.shape.size(); ++i)
         {
-            auto svgpl = svg::CavcPoly(outside.shape[i], Fill(), edgeBuffer,Stroke(2, color));
-            doc << svgpl;
-        }   
-        
-        // draw subtrees
-        drawVPTree(vptree, depth+1, n.left, inside,edgeBuffer, doc);
-        drawVPTree(vptree, depth+1, n.right, outside,edgeBuffer, doc); 
+            doc << svg::CavcPoly(outside.shape[i], Fill(), edgeBuffer, Stroke(2, color));
+        }    
     }
 }
 
@@ -268,7 +269,8 @@ int main()
     for(int i = 0; i < nb; ++i)
     {
         double x = rand1D() * dx;
-      double y = x;//rand1D() * dy;
+        // double y = x;
+        double y = rand1D() * dy;
         points[i] = std::vector<double>({x,y,0});
     }
 
@@ -286,12 +288,12 @@ int main()
     Cell cell;
     cell.shape.push_back(shape1);
     
-  // init edge structure
-  std::vector<CavcPoly::Edge> buffer;
+    // init edge structure
+    std::vector<CavcPoly::Edge> buffer;
   
-  // draw VP tree
+    // draw VP tree
     drawVPTree(vptree, 0, 0, cell, buffer, doc);
-
+    
     // save svg
     doc.save();
 
