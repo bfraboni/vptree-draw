@@ -25,7 +25,7 @@ public:
 
   Real bulge() const { return m_bulge; }
   Real &bulge() { return m_bulge; }
-
+  
   bool bulgeIsZero(Real epsilon = utils::realPrecision<Real>()) const {
     return std::abs(m_bulge) < epsilon;
   }

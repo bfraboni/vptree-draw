@@ -1,5 +1,6 @@
 #include <iostream> 
 #include <random>
+#include <set>
 #include <cassert>
 
 #include "vptree.hpp" 
@@ -7,6 +8,7 @@
 #include "cavc/polylinecombine.hpp"
 
 using namespace svg;
+
 
 // extend simple svg with arcs and cavc::Polyline<double> support
 namespace svg
@@ -53,12 +55,19 @@ namespace svg
         double radius, start, end;
     };
 
+    
+  
     class CavcPoly : public Shape
     {
     public:
-        CavcPoly(const cavc::Polyline<double>& poly, Fill const & fill, Stroke const & stroke = Stroke())
-            : Shape(fill, stroke), poly(poly) { }
-
+        
+      typedef std::array<double, 6>  Edge;
+         
+      CavcPoly(const cavc::Polyline<double>& poly, Fill const & fill, std::vector<Edge>&_edgeBuffer, Stroke const & stroke = Stroke())
+            : Shape(fill, stroke), poly(poly), edgeBuffer(_edgeBuffer) { }
+  
+       void resetEdgeBuffer() { edgeBuffer.clear(); }
+      
         std::string toString(Layout const & layout) const
         {
             std::stringstream ss;
@@ -66,7 +75,13 @@ namespace svg
             {
                 const auto& p1 = poly.vertexes()[i];
                 const auto& p2 = poly.vertexes()[(i+1)%poly.size()];
-
+                  
+              Edge e = { p1.x(), p1.y(), p1.bulge(), p2.x(), p2.y(), p2.bulge()};
+              Edge ee = { p2.x(), p2.y(), p2.bulge(), p1.x(), p1.y(), p1.bulge()};
+              if ((std::find(edgeBuffer.begin(), edgeBuffer.end(), e) == edgeBuffer.end()) &&
+                  (std::find(edgeBuffer.begin(), edgeBuffer.end(), e) == edgeBuffer.end()))
+              {
+                
                 if(!p1.bulgeIsZero())
                 {
                     // arc if bulge != 0
@@ -99,6 +114,10 @@ namespace svg
                     p << svg::Point(p1.pos().x(), p1.pos().y()) << svg::Point(p2.pos().x(), p2.pos().y());
                     ss << p.toString(layout);
                 }
+                
+                edgeBuffer.push_back(e);
+                
+              }
             }
 
             return ss.str();
@@ -106,8 +125,11 @@ namespace svg
         void offset(Point const & offset) { }
     private:
         const cavc::Polyline<double>& poly;
+        std::vector<Edge> &edgeBuffer;
     };
 }
+
+
 
 svg::Color rotate(const svg::Color& color, int hue) 
 {
@@ -133,7 +155,9 @@ struct Cell
     std::vector<cavc::Polyline<double>> holes;
 };
 
-void drawVPTree(const vpt::VpTree& vptree, int depth, int node, const Cell& cell, svg::Document& doc) 
+
+void drawVPTree(const vpt::VpTree& vptree, int depth, int node, const Cell& cell,
+                std::vector<CavcPoly::Edge> &edgeBuffer, svg::Document& doc)
 {
     if(node == vpt::VpTree::Node::Leaf)
         return;
@@ -198,20 +222,20 @@ void drawVPTree(const vpt::VpTree& vptree, int depth, int node, const Cell& cell
         svg::Color color = rotate(svg::Color::Defaults::Red, depth * 30);
         for(int i = 0; i < inside.shape.size(); ++i)
         {
-            auto svgpl = svg::CavcPoly(inside.shape[i], Fill(), Stroke(2, color));
+            auto svgpl = svg::CavcPoly(inside.shape[i], Fill(), edgeBuffer, Stroke(2, color));
             doc << svgpl;
         }
 
         // draw outside cell path
         for(int i = 0; i < outside.shape.size(); ++i)
         {
-            auto svgpl = svg::CavcPoly(outside.shape[i], Fill(), Stroke(2, color));
+            auto svgpl = svg::CavcPoly(outside.shape[i], Fill(), edgeBuffer,Stroke(2, color));
             doc << svgpl;
         }   
         
         // draw subtrees
-        drawVPTree(vptree, depth+1, n.left, inside, doc);
-        drawVPTree(vptree, depth+1, n.right, outside, doc); 
+        drawVPTree(vptree, depth+1, n.left, inside,edgeBuffer, doc);
+        drawVPTree(vptree, depth+1, n.right, outside,edgeBuffer, doc); 
     }
 }
 
@@ -244,7 +268,7 @@ int main()
     for(int i = 0; i < nb; ++i)
     {
         double x = rand1D() * dx;
-        double y = rand1D() * dy;
+      double y = x;//rand1D() * dy;
         points[i] = std::vector<double>({x,y,0});
     }
 
@@ -262,8 +286,11 @@ int main()
     Cell cell;
     cell.shape.push_back(shape1);
     
-    // draw VP tree
-    drawVPTree(vptree, 0, 0, cell, doc);
+  // init edge structure
+  std::vector<CavcPoly::Edge> buffer;
+  
+  // draw VP tree
+    drawVPTree(vptree, 0, 0, cell, buffer, doc);
 
     // save svg
     doc.save();
