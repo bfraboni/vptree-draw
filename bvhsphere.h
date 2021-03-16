@@ -48,7 +48,7 @@ namespace bvhsphere
 
         Tree(){}
         
-        Tree( const std::vector<geo::Point>& data ):points(data)
+        Tree( const std::vector<geo::Point>& data ) : points(data)
         {
             // build tree
             root = build(0, points.size());
@@ -91,13 +91,22 @@ namespace bvhsphere
             assert(mid != begin);
             assert(mid != end);
             
+
             // construction recursive des fils
             int left = build(begin, mid);
             int right = build(mid, end);
 
             // construction du noeud
             Node node;
-            node.make_node( geo::Sphere(nodes[left].bounds, nodes[right].bounds), left, right );
+
+            // old version : bounding sphere of child's bounding spheres
+            // geo::Sphere bounds = geo::Sphere(nodes[left].bounds, nodes[right].bounds); 
+            
+            // new version : tighter bounding sphere of subtrees primitives
+            std::vector<geo::Point> v(points.begin() + begin, points.begin() + end);
+            geo::Sphere bounds = geo::minisphere(v);
+
+            node.make_node( bounds, left, right );
             nodes.push_back(node);
             // printf("node : id %lu c %f %f r %f\n", nodes.size()-1, node.bounds.pos.x, node.bounds.pos.y, node.bounds.r);
             return (int) nodes.size() -1;
