@@ -16,6 +16,8 @@ Dependencies (included in this project)
 - Simple SVG drawing library [link](https://github.com/adishavit/simple-svg)
 - Cavaliers contours [link](https://github.com/jbuckmccready/CavalierContours)
 
+![](vptree.png)
+
 # Building
 
 The project uses [cmake](cmake.org) to build the examples. For
