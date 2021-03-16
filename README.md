@@ -38,6 +38,7 @@ the build binaries.
 |:---:|:---:|:---:|:---:|:---:|
 | ![](data/vptree.svg) | ![](data/quadtree.svg) | ![](data/kdtree.svg) | ![](data/bvhbox.svg) | ![](data/bvhsphere.svg) |
 
-Large poster with all methods
-![](data/poster.svg)
+|Large poster|
+|:---:|
+|![](data/poster.svg)|
 
