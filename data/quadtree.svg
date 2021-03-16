@@ -1,0 +1,434 @@
+<?xml version="1.0" standalone="no" ?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="1000px" height="1000px" xmlns="http://www.w3.org/2000/svg" version="1.1" >
+	<polygon points="0,1000 1000,1000 1000,0 0,0 " fill="rgb(255,255,255)" />
+	<circle cx="460.879" cy="962.422" r="2" fill="rgb(255,120,79)" />
+	<circle cx="510.09" cy="36.846" r="2" fill="rgb(263,96,178)" />
+	<polygon points="750,250 750,0 1000,0 1000,250 " fill="none" stroke-width="2" stroke="rgb(242,89,270)" />
+	<circle cx="532.881" cy="54.916" r="2" fill="rgb(242,89,270)" />
+	<polygon points="625,125 625,0 750,0 750,125 " fill="none" stroke-width="2" stroke="rgb(198,99,332)" />
+	<circle cx="546.968" cy="80.301" r="2" fill="rgb(198,99,332)" />
+	<polygon points="562.5,62.5 562.5,0 625,0 625,62.5 " fill="none" stroke-width="2" stroke="rgb(143,125,346)" />
+	<polygon points="500,62.5 500,0 562.5,0 562.5,62.5 " fill="none" stroke-width="2" stroke="rgb(143,125,346)" />
+	<circle cx="553.205" cy="108.775" r="2" fill="rgb(143,125,346)" />
+	<polygon points="500,125 500,62.5 562.5,62.5 562.5,125 " fill="none" stroke-width="2" stroke="rgb(143,125,346)" />
+	<polygon points="562.5,125 562.5,62.5 625,62.5 625,125 " fill="none" stroke-width="2" stroke="rgb(143,125,346)" />
+	<polygon points="500,125 500,0 625,0 625,125 " fill="none" stroke-width="2" stroke="rgb(198,99,332)" />
+	<circle cx="552.352" cy="138.013" r="2" fill="rgb(198,99,332)" />
+	<polygon points="562.5,187.5 562.5,125 625,125 625,187.5 " fill="none" stroke-width="2" stroke="rgb(143,125,346)" />
+	<circle cx="539.264" cy="163.662" r="2" fill="rgb(143,125,346)" />
+	<polygon points="531.25,156.25 531.25,125 562.5,125 562.5,156.25 " fill="none" stroke-width="2" stroke="rgb(91,158,310)" />
+	<polygon points="500,156.25 500,125 531.25,125 531.25,156.25 " fill="none" stroke-width="2" stroke="rgb(91,158,310)" />
+	<circle cx="517.035" cy="182.644" r="2" fill="rgb(91,158,310)" />
+	<polygon points="500,187.5 500,156.25 531.25,156.25 531.25,187.5 " fill="none" stroke-width="2" stroke="rgb(91,158,310)" />
+	<polygon points="531.25,187.5 531.25,156.25 562.5,156.25 562.5,187.5 " fill="none" stroke-width="2" stroke="rgb(91,158,310)" />
+	<polygon points="500,187.5 500,125 562.5,125 562.5,187.5 " fill="none" stroke-width="2" stroke="rgb(143,125,346)" />
+	<polygon points="500,250 500,187.5 562.5,187.5 562.5,250 " fill="none" stroke-width="2" stroke="rgb(143,125,346)" />
+	<polygon points="562.5,250 562.5,187.5 625,187.5 625,250 " fill="none" stroke-width="2" stroke="rgb(143,125,346)" />
+	<polygon points="500,250 500,125 625,125 625,250 " fill="none" stroke-width="2" stroke="rgb(198,99,332)" />
+	<polygon points="625,250 625,125 750,125 750,250 " fill="none" stroke-width="2" stroke="rgb(198,99,332)" />
+	<polygon points="500,250 500,0 750,0 750,250 " fill="none" stroke-width="2" stroke="rgb(242,89,270)" />
+	<circle cx="500.146" cy="371.038" r="2" fill="rgb(242,89,270)" />
+	<circle cx="644.32" cy="349.522" r="2" fill="rgb(198,99,332)" />
+	<polygon points="687.5,312.5 687.5,250 750,250 750,312.5 " fill="none" stroke-width="2" stroke="rgb(143,125,346)" />
+	<polygon points="625,312.5 625,250 687.5,250 687.5,312.5 " fill="none" stroke-width="2" stroke="rgb(143,125,346)" />
+	<circle cx="673.436" cy="351.907" r="2" fill="rgb(143,125,346)" />
+	<polygon points="625,375 625,312.5 687.5,312.5 687.5,375 " fill="none" stroke-width="2" stroke="rgb(143,125,346)" />
+	<circle cx="700.926" cy="361.966" r="2" fill="rgb(143,125,346)" />
+	<polygon points="718.75,343.75 718.75,312.5 750,312.5 750,343.75 " fill="none" stroke-width="2" stroke="rgb(91,158,310)" />
+	<polygon points="687.5,343.75 687.5,312.5 718.75,312.5 718.75,343.75 " fill="none" stroke-width="2" stroke="rgb(91,158,310)" />
+	<polygon points="687.5,375 687.5,343.75 718.75,343.75 718.75,375 " fill="none" stroke-width="2" stroke="rgb(91,158,310)" />
+	<circle cx="727.205" cy="374.915" r="2" fill="rgb(91,158,310)" />
+	<polygon points="718.75,375 718.75,343.75 750,343.75 750,375 " fill="none" stroke-width="2" stroke="rgb(91,158,310)" />
+	<polygon points="687.5,375 687.5,312.5 750,312.5 750,375 " fill="none" stroke-width="2" stroke="rgb(143,125,346)" />
+	<polygon points="625,375 625,250 750,250 750,375 " fill="none" stroke-width="2" stroke="rgb(198,99,332)" />
+	<circle cx="528.503" cy="363.638" r="2" fill="rgb(198,99,332)" />
+	<polygon points="562.5,312.5 562.5,250 625,250 625,312.5 " fill="none" stroke-width="2" stroke="rgb(143,125,346)" />
+	<polygon points="500,312.5 500,250 562.5,250 562.5,312.5 " fill="none" stroke-width="2" stroke="rgb(143,125,346)" />
+	<circle cx="556.99" cy="356.783" r="2" fill="rgb(143,125,346)" />
+	<polygon points="500,375 500,312.5 562.5,312.5 562.5,375 " fill="none" stroke-width="2" stroke="rgb(143,125,346)" />
+	<circle cx="585.81" cy="351.679" r="2" fill="rgb(143,125,346)" />
+	<polygon points="593.75,343.75 593.75,312.5 625,312.5 625,343.75 " fill="none" stroke-width="2" stroke="rgb(91,158,310)" />
+	<polygon points="562.5,343.75 562.5,312.5 593.75,312.5 593.75,343.75 " fill="none" stroke-width="2" stroke="rgb(91,158,310)" />
+	<polygon points="562.5,375 562.5,343.75 593.75,343.75 593.75,375 " fill="none" stroke-width="2" stroke="rgb(91,158,310)" />
+	<circle cx="615.031" cy="349.649" r="2" fill="rgb(91,158,310)" />
+	<polygon points="593.75,375 593.75,343.75 625,343.75 625,375 " fill="none" stroke-width="2" stroke="rgb(91,158,310)" />
+	<polygon points="562.5,375 562.5,312.5 625,312.5 625,375 " fill="none" stroke-width="2" stroke="rgb(143,125,346)" />
+	<polygon points="500,375 500,250 625,250 625,375 " fill="none" stroke-width="2" stroke="rgb(198,99,332)" />
+	<polygon points="500,500 500,375 625,375 625,500 " fill="none" stroke-width="2" stroke="rgb(198,99,332)" />
+	<polygon points="625,500 625,375 750,375 750,500 " fill="none" stroke-width="2" stroke="rgb(198,99,332)" />
+	<polygon points="500,500 500,250 750,250 750,500 " fill="none" stroke-width="2" stroke="rgb(242,89,270)" />
+	<circle cx="752.366" cy="389.902" r="2" fill="rgb(242,89,270)" />
+	<polygon points="875,375 875,250 1000,250 1000,375 " fill="none" stroke-width="2" stroke="rgb(198,99,332)" />
+	<polygon points="750,375 750,250 875,250 875,375 " fill="none" stroke-width="2" stroke="rgb(198,99,332)" />
+	<circle cx="775.314" cy="408.061" r="2" fill="rgb(198,99,332)" />
+	<polygon points="812.5,437.5 812.5,375 875,375 875,437.5 " fill="none" stroke-width="2" stroke="rgb(143,125,346)" />
+	<circle cx="796.348" cy="428.45" r="2" fill="rgb(143,125,346)" />
+	<polygon points="750,437.5 750,375 812.5,375 812.5,437.5 " fill="none" stroke-width="2" stroke="rgb(143,125,346)" />
+	<polygon points="750,500 750,437.5 812.5,437.5 812.5,500 " fill="none" stroke-width="2" stroke="rgb(143,125,346)" />
+	<circle cx="814.987" cy="451.032" r="2" fill="rgb(143,125,346)" />
+	<polygon points="843.75,468.75 843.75,437.5 875,437.5 875,468.75 " fill="none" stroke-width="2" stroke="rgb(91,158,310)" />
+	<polygon points="812.5,468.75 812.5,437.5 843.75,437.5 843.75,468.75 " fill="none" stroke-width="2" stroke="rgb(91,158,310)" />
+	<circle cx="831.425" cy="475.249" r="2" fill="rgb(91,158,310)" />
+	<polygon points="812.5,500 812.5,468.75 843.75,468.75 843.75,500 " fill="none" stroke-width="2" stroke="rgb(91,158,310)" />
+	<polygon points="843.75,500 843.75,468.75 875,468.75 875,500 " fill="none" stroke-width="2" stroke="rgb(91,158,310)" />
+	<polygon points="812.5,500 812.5,437.5 875,437.5 875,500 " fill="none" stroke-width="2" stroke="rgb(143,125,346)" />
+	<polygon points="750,500 750,375 875,375 875,500 " fill="none" stroke-width="2" stroke="rgb(198,99,332)" />
+	<polygon points="875,500 875,375 1000,375 1000,500 " fill="none" stroke-width="2" stroke="rgb(198,99,332)" />
+	<polygon points="750,500 750,250 1000,250 1000,500 " fill="none" stroke-width="2" stroke="rgb(242,89,270)" />
+	<polygon points="500,500 500,0 1000,0 1000,500 " fill="none" stroke-width="2" stroke="rgb(263,96,178)" />
+	<circle cx="88.925" cy="491.267" r="2" fill="rgb(263,96,178)" />
+	<circle cx="264.791" cy="82.149" r="2" fill="rgb(242,89,270)" />
+	<circle cx="384.358" cy="108.327" r="2" fill="rgb(198,99,332)" />
+	<circle cx="458.01" cy="60.528" r="2" fill="rgb(143,125,346)" />
+	<polygon points="468.75,31.25 468.75,0 500,0 500,31.25 " fill="none" stroke-width="2" stroke="rgb(91,158,310)" />
+	<polygon points="437.5,31.25 437.5,0 468.75,0 468.75,31.25 " fill="none" stroke-width="2" stroke="rgb(91,158,310)" />
+	<polygon points="437.5,62.5 437.5,31.25 468.75,31.25 468.75,62.5 " fill="none" stroke-width="2" stroke="rgb(91,158,310)" />
+	<circle cx="482.876" cy="45.031" r="2" fill="rgb(91,158,310)" />
+	<polygon points="468.75,62.5 468.75,31.25 500,31.25 500,62.5 " fill="none" stroke-width="2" stroke="rgb(91,158,310)" />
+	<polygon points="437.5,62.5 437.5,0 500,0 500,62.5 " fill="none" stroke-width="2" stroke="rgb(143,125,346)" />
+	<polygon points="375,62.5 375,0 437.5,0 437.5,62.5 " fill="none" stroke-width="2" stroke="rgb(143,125,346)" />
+	<circle cx="409.092" cy="92.598" r="2" fill="rgb(143,125,346)" />
+	<circle cx="433.775" cy="77.0099" r="2" fill="rgb(91,158,310)" />
+	<polygon points="406.25,93.75 406.25,62.5 437.5,62.5 437.5,93.75 " fill="none" stroke-width="2" stroke="rgb(91,158,310)" />
+	<polygon points="375,93.75 375,62.5 406.25,62.5 406.25,93.75 " fill="none" stroke-width="2" stroke="rgb(91,158,310)" />
+	<polygon points="375,125 375,93.75 406.25,93.75 406.25,125 " fill="none" stroke-width="2" stroke="rgb(91,158,310)" />
+	<polygon points="406.25,125 406.25,93.75 437.5,93.75 437.5,125 " fill="none" stroke-width="2" stroke="rgb(91,158,310)" />
+	<polygon points="375,125 375,62.5 437.5,62.5 437.5,125 " fill="none" stroke-width="2" stroke="rgb(143,125,346)" />
+	<polygon points="437.5,125 437.5,62.5 500,62.5 500,125 " fill="none" stroke-width="2" stroke="rgb(143,125,346)" />
+	<polygon points="375,125 375,0 500,0 500,125 " fill="none" stroke-width="2" stroke="rgb(198,99,332)" />
+	<circle cx="287.318" cy="100.052" r="2" fill="rgb(198,99,332)" />
+	<polygon points="250,125 250,0 375,0 375,125 " fill="none" stroke-width="2" stroke="rgb(198,99,332)" />
+	<circle cx="294.828" cy="128.038" r="2" fill="rgb(198,99,332)" />
+	<circle cx="316.199" cy="163.643" r="2" fill="rgb(143,125,346)" />
+	<circle cx="360.594" cy="125.446" r="2" fill="rgb(91,158,310)" />
+	<polygon points="343.75,156.25 343.75,125 375,125 375,156.25 " fill="none" stroke-width="2" stroke="rgb(91,158,310)" />
+	<circle cx="337.922" cy="143.98" r="2" fill="rgb(91,158,310)" />
+	<polygon points="312.5,156.25 312.5,125 343.75,125 343.75,156.25 " fill="none" stroke-width="2" stroke="rgb(91,158,310)" />
+	<polygon points="312.5,187.5 312.5,156.25 343.75,156.25 343.75,187.5 " fill="none" stroke-width="2" stroke="rgb(91,158,310)" />
+	<polygon points="343.75,187.5 343.75,156.25 375,156.25 375,187.5 " fill="none" stroke-width="2" stroke="rgb(91,158,310)" />
+	<polygon points="312.5,187.5 312.5,125 375,125 375,187.5 " fill="none" stroke-width="2" stroke="rgb(143,125,346)" />
+	<circle cx="291.822" cy="157.073" r="2" fill="rgb(143,125,346)" />
+	<polygon points="281.25,156.25 281.25,125 312.5,125 312.5,156.25 " fill="none" stroke-width="2" stroke="rgb(91,158,310)" />
+	<polygon points="250,156.25 250,125 281.25,125 281.25,156.25 " fill="none" stroke-width="2" stroke="rgb(91,158,310)" />
+	<polygon points="250,187.5 250,156.25 281.25,156.25 281.25,187.5 " fill="none" stroke-width="2" stroke="rgb(91,158,310)" />
+	<circle cx="281.47" cy="184.425" r="2" fill="rgb(91,158,310)" />
+	<polygon points="296.875,171.875 296.875,156.25 312.5,156.25 312.5,171.875 " fill="none" stroke-width="2" stroke="rgb(56,191,231)" />
+	<polygon points="281.25,171.875 281.25,156.25 296.875,156.25 296.875,171.875 " fill="none" stroke-width="2" stroke="rgb(56,191,231)" />
+	<circle cx="294.239" cy="183.043" r="2" fill="rgb(56,191,231)" />
+	<polygon points="281.25,187.5 281.25,171.875 296.875,171.875 296.875,187.5 " fill="none" stroke-width="2" stroke="rgb(56,191,231)" />
+	<polygon points="296.875,187.5 296.875,171.875 312.5,171.875 312.5,187.5 " fill="none" stroke-width="2" stroke="rgb(56,191,231)" />
+	<polygon points="281.25,187.5 281.25,156.25 312.5,156.25 312.5,187.5 " fill="none" stroke-width="2" stroke="rgb(91,158,310)" />
+	<polygon points="250,187.5 250,125 312.5,125 312.5,187.5 " fill="none" stroke-width="2" stroke="rgb(143,125,346)" />
+	<polygon points="250,250 250,187.5 312.5,187.5 312.5,250 " fill="none" stroke-width="2" stroke="rgb(143,125,346)" />
+	<polygon points="312.5,250 312.5,187.5 375,187.5 375,250 " fill="none" stroke-width="2" stroke="rgb(143,125,346)" />
+	<polygon points="250,250 250,125 375,125 375,250 " fill="none" stroke-width="2" stroke="rgb(198,99,332)" />
+	<circle cx="491.11" cy="196.206" r="2" fill="rgb(198,99,332)" />
+	<polygon points="437.5,187.5 437.5,125 500,125 500,187.5 " fill="none" stroke-width="2" stroke="rgb(143,125,346)" />
+	<polygon points="375,187.5 375,125 437.5,125 437.5,187.5 " fill="none" stroke-width="2" stroke="rgb(143,125,346)" />
+	<circle cx="437.456" cy="219.683" r="2" fill="rgb(143,125,346)" />
+	<polygon points="406.25,218.75 406.25,187.5 437.5,187.5 437.5,218.75 " fill="none" stroke-width="2" stroke="rgb(91,158,310)" />
+	<polygon points="375,218.75 375,187.5 406.25,187.5 406.25,218.75 " fill="none" stroke-width="2" stroke="rgb(91,158,310)" />
+	<circle cx="385.76" cy="247.2" r="2" fill="rgb(91,158,310)" />
+	<polygon points="375,250 375,218.75 406.25,218.75 406.25,250 " fill="none" stroke-width="2" stroke="rgb(91,158,310)" />
+	<circle cx="411.641" cy="233.463" r="2" fill="rgb(91,158,310)" />
+	<polygon points="406.25,250 406.25,218.75 437.5,218.75 437.5,250 " fill="none" stroke-width="2" stroke="rgb(91,158,310)" />
+	<polygon points="375,250 375,187.5 437.5,187.5 437.5,250 " fill="none" stroke-width="2" stroke="rgb(143,125,346)" />
+	<circle cx="464.395" cy="208.256" r="2" fill="rgb(143,125,346)" />
+	<polygon points="437.5,250 437.5,187.5 500,187.5 500,250 " fill="none" stroke-width="2" stroke="rgb(143,125,346)" />
+	<polygon points="375,250 375,125 500,125 500,250 " fill="none" stroke-width="2" stroke="rgb(198,99,332)" />
+	<polygon points="250,250 250,0 500,0 500,250 " fill="none" stroke-width="2" stroke="rgb(242,89,270)" />
+	<circle cx="78.951" cy="249.608" r="2" fill="rgb(242,89,270)" />
+	<circle cx="196.452" cy="119.497" r="2" fill="rgb(198,99,332)" />
+	<polygon points="187.5,62.5 187.5,0 250,0 250,62.5 " fill="none" stroke-width="2" stroke="rgb(143,125,346)" />
+	<polygon points="125,62.5 125,0 187.5,0 187.5,62.5 " fill="none" stroke-width="2" stroke="rgb(143,125,346)" />
+	<polygon points="125,125 125,62.5 187.5,62.5 187.5,125 " fill="none" stroke-width="2" stroke="rgb(143,125,346)" />
+	<circle cx="209.981" cy="93.954" r="2" fill="rgb(143,125,346)" />
+	<circle cx="235.814" cy="80.401" r="2" fill="rgb(91,158,310)" />
+	<polygon points="218.75,93.75 218.75,62.5 250,62.5 250,93.75 " fill="none" stroke-width="2" stroke="rgb(91,158,310)" />
+	<polygon points="187.5,93.75 187.5,62.5 218.75,62.5 218.75,93.75 " fill="none" stroke-width="2" stroke="rgb(91,158,310)" />
+	<polygon points="187.5,125 187.5,93.75 218.75,93.75 218.75,125 " fill="none" stroke-width="2" stroke="rgb(91,158,310)" />
+	<polygon points="218.75,125 218.75,93.75 250,93.75 250,125 " fill="none" stroke-width="2" stroke="rgb(91,158,310)" />
+	<polygon points="187.5,125 187.5,62.5 250,62.5 250,125 " fill="none" stroke-width="2" stroke="rgb(143,125,346)" />
+	<polygon points="125,125 125,0 250,0 250,125 " fill="none" stroke-width="2" stroke="rgb(198,99,332)" />
+	<polygon points="0,125 0,0 125,0 125,125 " fill="none" stroke-width="2" stroke="rgb(198,99,332)" />
+	<circle cx="100.948" cy="230.849" r="2" fill="rgb(198,99,332)" />
+	<polygon points="0,250 0,125 125,125 125,250 " fill="none" stroke-width="2" stroke="rgb(198,99,332)" />
+	<circle cx="128.389" cy="220.649" r="2" fill="rgb(198,99,332)" />
+	<circle cx="189.652" cy="147.918" r="2" fill="rgb(143,125,346)" />
+	<polygon points="187.5,187.5 187.5,125 250,125 250,187.5 " fill="none" stroke-width="2" stroke="rgb(143,125,346)" />
+	<circle cx="186.717" cy="177.071" r="2" fill="rgb(143,125,346)" />
+	<polygon points="125,187.5 125,125 187.5,125 187.5,187.5 " fill="none" stroke-width="2" stroke="rgb(143,125,346)" />
+	<circle cx="156.825" cy="213.641" r="2" fill="rgb(143,125,346)" />
+	<circle cx="183.784" cy="206.233" r="2" fill="rgb(91,158,310)" />
+	<polygon points="156.25,218.75 156.25,187.5 187.5,187.5 187.5,218.75 " fill="none" stroke-width="2" stroke="rgb(91,158,310)" />
+	<polygon points="125,218.75 125,187.5 156.25,187.5 156.25,218.75 " fill="none" stroke-width="2" stroke="rgb(91,158,310)" />
+	<polygon points="125,250 125,218.75 156.25,218.75 156.25,250 " fill="none" stroke-width="2" stroke="rgb(91,158,310)" />
+	<polygon points="156.25,250 156.25,218.75 187.5,218.75 187.5,250 " fill="none" stroke-width="2" stroke="rgb(91,158,310)" />
+	<polygon points="125,250 125,187.5 187.5,187.5 187.5,250 " fill="none" stroke-width="2" stroke="rgb(143,125,346)" />
+	<polygon points="187.5,250 187.5,187.5 250,187.5 250,250 " fill="none" stroke-width="2" stroke="rgb(143,125,346)" />
+	<polygon points="125,250 125,125 250,125 250,250 " fill="none" stroke-width="2" stroke="rgb(198,99,332)" />
+	<polygon points="0,250 0,0 250,0 250,250 " fill="none" stroke-width="2" stroke="rgb(242,89,270)" />
+	<circle cx="65.414" cy="474.502" r="2" fill="rgb(242,89,270)" />
+	<polygon points="125,375 125,250 250,250 250,375 " fill="none" stroke-width="2" stroke="rgb(198,99,332)" />
+	<circle cx="62.918" cy="364.111" r="2" fill="rgb(198,99,332)" />
+	<circle cx="72.422" cy="306.286" r="2" fill="rgb(143,125,346)" />
+	<polygon points="93.75,281.25 93.75,250 125,250 125,281.25 " fill="none" stroke-width="2" stroke="rgb(91,158,310)" />
+	<circle cx="70.048" cy="277.248" r="2" fill="rgb(91,158,310)" />
+	<polygon points="62.5,281.25 62.5,250 93.75,250 93.75,281.25 " fill="none" stroke-width="2" stroke="rgb(91,158,310)" />
+	<polygon points="62.5,312.5 62.5,281.25 93.75,281.25 93.75,312.5 " fill="none" stroke-width="2" stroke="rgb(91,158,310)" />
+	<polygon points="93.75,312.5 93.75,281.25 125,281.25 125,312.5 " fill="none" stroke-width="2" stroke="rgb(91,158,310)" />
+	<polygon points="62.5,312.5 62.5,250 125,250 125,312.5 " fill="none" stroke-width="2" stroke="rgb(143,125,346)" />
+	<polygon points="0,312.5 0,250 62.5,250 62.5,312.5 " fill="none" stroke-width="2" stroke="rgb(143,125,346)" />
+	<polygon points="0,375 0,312.5 62.5,312.5 62.5,375 " fill="none" stroke-width="2" stroke="rgb(143,125,346)" />
+	<circle cx="67.712" cy="335.223" r="2" fill="rgb(143,125,346)" />
+	<polygon points="62.5,375 62.5,312.5 125,312.5 125,375 " fill="none" stroke-width="2" stroke="rgb(143,125,346)" />
+	<polygon points="0,375 0,250 125,250 125,375 " fill="none" stroke-width="2" stroke="rgb(198,99,332)" />
+	<circle cx="50.184" cy="449.766" r="2" fill="rgb(198,99,332)" />
+	<polygon points="62.5,437.5 62.5,375 125,375 125,437.5 " fill="none" stroke-width="2" stroke="rgb(143,125,346)" />
+	<circle cx="48.28" cy="420.768" r="2" fill="rgb(143,125,346)" />
+	<circle cx="55.396" cy="392.412" r="2" fill="rgb(91,158,310)" />
+	<polygon points="31.25,406.25 31.25,375 62.5,375 62.5,406.25 " fill="none" stroke-width="2" stroke="rgb(91,158,310)" />
+	<polygon points="0,406.25 0,375 31.25,375 31.25,406.25 " fill="none" stroke-width="2" stroke="rgb(91,158,310)" />
+	<polygon points="0,437.5 0,406.25 31.25,406.25 31.25,437.5 " fill="none" stroke-width="2" stroke="rgb(91,158,310)" />
+	<polygon points="31.25,437.5 31.25,406.25 62.5,406.25 62.5,437.5 " fill="none" stroke-width="2" stroke="rgb(91,158,310)" />
+	<polygon points="0,437.5 0,375 62.5,375 62.5,437.5 " fill="none" stroke-width="2" stroke="rgb(143,125,346)" />
+	<polygon points="0,500 0,437.5 62.5,437.5 62.5,500 " fill="none" stroke-width="2" stroke="rgb(143,125,346)" />
+	<polygon points="62.5,500 62.5,437.5 125,437.5 125,500 " fill="none" stroke-width="2" stroke="rgb(143,125,346)" />
+	<polygon points="0,500 0,375 125,375 125,500 " fill="none" stroke-width="2" stroke="rgb(198,99,332)" />
+	<polygon points="125,500 125,375 250,375 250,500 " fill="none" stroke-width="2" stroke="rgb(198,99,332)" />
+	<polygon points="0,500 0,250 250,250 250,500 " fill="none" stroke-width="2" stroke="rgb(242,89,270)" />
+	<circle cx="360.677" cy="262.231" r="2" fill="rgb(242,89,270)" />
+	<circle cx="386.504" cy="364.877" r="2" fill="rgb(198,99,332)" />
+	<polygon points="437.5,312.5 437.5,250 500,250 500,312.5 " fill="none" stroke-width="2" stroke="rgb(143,125,346)" />
+	<polygon points="375,312.5 375,250 437.5,250 437.5,312.5 " fill="none" stroke-width="2" stroke="rgb(143,125,346)" />
+	<circle cx="414.68" cy="372.724" r="2" fill="rgb(143,125,346)" />
+	<polygon points="375,375 375,312.5 437.5,312.5 437.5,375 " fill="none" stroke-width="2" stroke="rgb(143,125,346)" />
+	<polygon points="437.5,375 437.5,312.5 500,312.5 500,375 " fill="none" stroke-width="2" stroke="rgb(143,125,346)" />
+	<polygon points="375,375 375,250 500,250 500,375 " fill="none" stroke-width="2" stroke="rgb(198,99,332)" />
+	<circle cx="336.216" cy="278.241" r="2" fill="rgb(198,99,332)" />
+	<circle cx="331.273" cy="305.457" r="2" fill="rgb(143,125,346)" />
+	<polygon points="312.5,312.5 312.5,250 375,250 375,312.5 " fill="none" stroke-width="2" stroke="rgb(143,125,346)" />
+	<polygon points="250,312.5 250,250 312.5,250 312.5,312.5 " fill="none" stroke-width="2" stroke="rgb(143,125,346)" />
+	<polygon points="250,375 250,312.5 312.5,312.5 312.5,375 " fill="none" stroke-width="2" stroke="rgb(143,125,346)" />
+	<circle cx="341.028" cy="332.998" r="2" fill="rgb(143,125,346)" />
+	<polygon points="343.75,343.75 343.75,312.5 375,312.5 375,343.75 " fill="none" stroke-width="2" stroke="rgb(91,158,310)" />
+	<polygon points="312.5,343.75 312.5,312.5 343.75,312.5 343.75,343.75 " fill="none" stroke-width="2" stroke="rgb(91,158,310)" />
+	<polygon points="312.5,375 312.5,343.75 343.75,343.75 343.75,375 " fill="none" stroke-width="2" stroke="rgb(91,158,310)" />
+	<circle cx="359.038" cy="355.927" r="2" fill="rgb(91,158,310)" />
+	<polygon points="343.75,375 343.75,343.75 375,343.75 375,375 " fill="none" stroke-width="2" stroke="rgb(91,158,310)" />
+	<polygon points="312.5,375 312.5,312.5 375,312.5 375,375 " fill="none" stroke-width="2" stroke="rgb(143,125,346)" />
+	<polygon points="250,375 250,250 375,250 375,375 " fill="none" stroke-width="2" stroke="rgb(198,99,332)" />
+	<polygon points="250,500 250,375 375,375 375,500 " fill="none" stroke-width="2" stroke="rgb(198,99,332)" />
+	<circle cx="442.726" cy="380.889" r="2" fill="rgb(198,99,332)" />
+	<circle cx="471.751" cy="378.17" r="2" fill="rgb(143,125,346)" />
+	<polygon points="437.5,437.5 437.5,375 500,375 500,437.5 " fill="none" stroke-width="2" stroke="rgb(143,125,346)" />
+	<polygon points="375,437.5 375,375 437.5,375 437.5,437.5 " fill="none" stroke-width="2" stroke="rgb(143,125,346)" />
+	<polygon points="375,500 375,437.5 437.5,437.5 437.5,500 " fill="none" stroke-width="2" stroke="rgb(143,125,346)" />
+	<polygon points="437.5,500 437.5,437.5 500,437.5 500,500 " fill="none" stroke-width="2" stroke="rgb(143,125,346)" />
+	<polygon points="375,500 375,375 500,375 500,500 " fill="none" stroke-width="2" stroke="rgb(198,99,332)" />
+	<polygon points="250,500 250,250 500,250 500,500 " fill="none" stroke-width="2" stroke="rgb(242,89,270)" />
+	<polygon points="0,500 0,0 500,0 500,500 " fill="none" stroke-width="2" stroke="rgb(263,96,178)" />
+	<circle cx="431.985" cy="957.971" r="2" fill="rgb(263,96,178)" />
+	<polygon points="250,750 250,500 500,500 500,750 " fill="none" stroke-width="2" stroke="rgb(242,89,270)" />
+	<circle cx="220.221" cy="748.475" r="2" fill="rgb(242,89,270)" />
+	<polygon points="125,625 125,500 250,500 250,625 " fill="none" stroke-width="2" stroke="rgb(198,99,332)" />
+	<circle cx="109.692" cy="616.242" r="2" fill="rgb(198,99,332)" />
+	<circle cx="98.89" cy="559.848" r="2" fill="rgb(143,125,346)" />
+	<circle cx="101.893" cy="530.742" r="2" fill="rgb(91,158,310)" />
+	<circle cx="112.451" cy="503.511" r="2" fill="rgb(56,191,231)" />
+	<polygon points="109.375,515.625 109.375,500 125,500 125,515.625 " fill="none" stroke-width="2" stroke="rgb(56,191,231)" />
+	<polygon points="93.75,515.625 93.75,500 109.375,500 109.375,515.625 " fill="none" stroke-width="2" stroke="rgb(56,191,231)" />
+	<polygon points="93.75,531.25 93.75,515.625 109.375,515.625 109.375,531.25 " fill="none" stroke-width="2" stroke="rgb(56,191,231)" />
+	<polygon points="109.375,531.25 109.375,515.625 125,515.625 125,531.25 " fill="none" stroke-width="2" stroke="rgb(56,191,231)" />
+	<polygon points="93.75,531.25 93.75,500 125,500 125,531.25 " fill="none" stroke-width="2" stroke="rgb(91,158,310)" />
+	<polygon points="62.5,531.25 62.5,500 93.75,500 93.75,531.25 " fill="none" stroke-width="2" stroke="rgb(91,158,310)" />
+	<polygon points="62.5,562.5 62.5,531.25 93.75,531.25 93.75,562.5 " fill="none" stroke-width="2" stroke="rgb(91,158,310)" />
+	<polygon points="93.75,562.5 93.75,531.25 125,531.25 125,562.5 " fill="none" stroke-width="2" stroke="rgb(91,158,310)" />
+	<polygon points="62.5,562.5 62.5,500 125,500 125,562.5 " fill="none" stroke-width="2" stroke="rgb(143,125,346)" />
+	<polygon points="0,562.5 0,500 62.5,500 62.5,562.5 " fill="none" stroke-width="2" stroke="rgb(143,125,346)" />
+	<polygon points="0,625 0,562.5 62.5,562.5 62.5,625 " fill="none" stroke-width="2" stroke="rgb(143,125,346)" />
+	<circle cx="99.23" cy="589.085" r="2" fill="rgb(143,125,346)" />
+	<polygon points="62.5,625 62.5,562.5 125,562.5 125,625 " fill="none" stroke-width="2" stroke="rgb(143,125,346)" />
+	<polygon points="0,625 0,500 125,500 125,625 " fill="none" stroke-width="2" stroke="rgb(198,99,332)" />
+	<circle cx="122.099" cy="642.656" r="2" fill="rgb(198,99,332)" />
+	<polygon points="0,750 0,625 125,625 125,750 " fill="none" stroke-width="2" stroke="rgb(198,99,332)" />
+	<circle cx="196.716" cy="731.306" r="2" fill="rgb(198,99,332)" />
+	<polygon points="187.5,687.5 187.5,625 250,625 250,687.5 " fill="none" stroke-width="2" stroke="rgb(143,125,346)" />
+	<circle cx="135.909" cy="668.217" r="2" fill="rgb(143,125,346)" />
+	<polygon points="125,687.5 125,625 187.5,625 187.5,687.5 " fill="none" stroke-width="2" stroke="rgb(143,125,346)" />
+	<circle cx="174.426" cy="712.357" r="2" fill="rgb(143,125,346)" />
+	<polygon points="156.25,718.75 156.25,687.5 187.5,687.5 187.5,718.75 " fill="none" stroke-width="2" stroke="rgb(91,158,310)" />
+	<circle cx="154.906" cy="690.534" r="2" fill="rgb(91,158,310)" />
+	<polygon points="125,718.75 125,687.5 156.25,687.5 156.25,718.75 " fill="none" stroke-width="2" stroke="rgb(91,158,310)" />
+	<polygon points="125,750 125,718.75 156.25,718.75 156.25,750 " fill="none" stroke-width="2" stroke="rgb(91,158,310)" />
+	<polygon points="156.25,750 156.25,718.75 187.5,718.75 187.5,750 " fill="none" stroke-width="2" stroke="rgb(91,158,310)" />
+	<polygon points="125,750 125,687.5 187.5,687.5 187.5,750 " fill="none" stroke-width="2" stroke="rgb(143,125,346)" />
+	<polygon points="187.5,750 187.5,687.5 250,687.5 250,750 " fill="none" stroke-width="2" stroke="rgb(143,125,346)" />
+	<polygon points="125,750 125,625 250,625 250,750 " fill="none" stroke-width="2" stroke="rgb(198,99,332)" />
+	<polygon points="0,750 0,500 250,500 250,750 " fill="none" stroke-width="2" stroke="rgb(242,89,270)" />
+	<circle cx="234.478" cy="934.446" r="2" fill="rgb(242,89,270)" />
+	<circle cx="215.714" cy="859.024" r="2" fill="rgb(198,99,332)" />
+	<circle cx="247.429" cy="759.254" r="2" fill="rgb(143,125,346)" />
+	<polygon points="187.5,812.5 187.5,750 250,750 250,812.5 " fill="none" stroke-width="2" stroke="rgb(143,125,346)" />
+	<polygon points="125,812.5 125,750 187.5,750 187.5,812.5 " fill="none" stroke-width="2" stroke="rgb(143,125,346)" />
+	<polygon points="125,875 125,812.5 187.5,812.5 187.5,875 " fill="none" stroke-width="2" stroke="rgb(143,125,346)" />
+	<circle cx="229.894" cy="833.504" r="2" fill="rgb(143,125,346)" />
+	<polygon points="187.5,875 187.5,812.5 250,812.5 250,875 " fill="none" stroke-width="2" stroke="rgb(143,125,346)" />
+	<polygon points="125,875 125,750 250,750 250,875 " fill="none" stroke-width="2" stroke="rgb(198,99,332)" />
+	<polygon points="0,875 0,750 125,750 125,875 " fill="none" stroke-width="2" stroke="rgb(198,99,332)" />
+	<polygon points="0,1000 0,875 125,875 125,1000 " fill="none" stroke-width="2" stroke="rgb(198,99,332)" />
+	<circle cx="229.621" cy="907.304" r="2" fill="rgb(198,99,332)" />
+	<circle cx="227.546" cy="882.634" r="2" fill="rgb(143,125,346)" />
+	<polygon points="187.5,937.5 187.5,875 250,875 250,937.5 " fill="none" stroke-width="2" stroke="rgb(143,125,346)" />
+	<polygon points="125,937.5 125,875 187.5,875 187.5,937.5 " fill="none" stroke-width="2" stroke="rgb(143,125,346)" />
+	<polygon points="125,1000 125,937.5 187.5,937.5 187.5,1000 " fill="none" stroke-width="2" stroke="rgb(143,125,346)" />
+	<polygon points="187.5,1000 187.5,937.5 250,937.5 250,1000 " fill="none" stroke-width="2" stroke="rgb(143,125,346)" />
+	<polygon points="125,1000 125,875 250,875 250,1000 " fill="none" stroke-width="2" stroke="rgb(198,99,332)" />
+	<polygon points="0,1000 0,750 250,750 250,1000 " fill="none" stroke-width="2" stroke="rgb(242,89,270)" />
+	<circle cx="405.039" cy="946.68" r="2" fill="rgb(242,89,270)" />
+	<polygon points="375,875 375,750 500,750 500,875 " fill="none" stroke-width="2" stroke="rgb(198,99,332)" />
+	<circle cx="251.557" cy="814.463" r="2" fill="rgb(198,99,332)" />
+	<polygon points="312.5,812.5 312.5,750 375,750 375,812.5 " fill="none" stroke-width="2" stroke="rgb(143,125,346)" />
+	<circle cx="278.445" cy="802.877" r="2" fill="rgb(143,125,346)" />
+	<circle cx="295.392" cy="781.159" r="2" fill="rgb(91,158,310)" />
+	<polygon points="281.25,781.25 281.25,750 312.5,750 312.5,781.25 " fill="none" stroke-width="2" stroke="rgb(91,158,310)" />
+	<circle cx="275.616" cy="767.243" r="2" fill="rgb(91,158,310)" />
+	<polygon points="250,781.25 250,750 281.25,750 281.25,781.25 " fill="none" stroke-width="2" stroke="rgb(91,158,310)" />
+	<polygon points="250,812.5 250,781.25 281.25,781.25 281.25,812.5 " fill="none" stroke-width="2" stroke="rgb(91,158,310)" />
+	<polygon points="281.25,812.5 281.25,781.25 312.5,781.25 312.5,812.5 " fill="none" stroke-width="2" stroke="rgb(91,158,310)" />
+	<polygon points="250,812.5 250,750 312.5,750 312.5,812.5 " fill="none" stroke-width="2" stroke="rgb(143,125,346)" />
+	<polygon points="250,875 250,812.5 312.5,812.5 312.5,875 " fill="none" stroke-width="2" stroke="rgb(143,125,346)" />
+	<polygon points="312.5,875 312.5,812.5 375,812.5 375,875 " fill="none" stroke-width="2" stroke="rgb(143,125,346)" />
+	<polygon points="250,875 250,750 375,750 375,875 " fill="none" stroke-width="2" stroke="rgb(198,99,332)" />
+	<circle cx="347.321" cy="945.269" r="2" fill="rgb(198,99,332)" />
+	<polygon points="312.5,937.5 312.5,875 375,875 375,937.5 " fill="none" stroke-width="2" stroke="rgb(143,125,346)" />
+	<polygon points="250,937.5 250,875 312.5,875 312.5,937.5 " fill="none" stroke-width="2" stroke="rgb(143,125,346)" />
+	<circle cx="289.093" cy="950.721" r="2" fill="rgb(143,125,346)" />
+	<polygon points="281.25,968.75 281.25,937.5 312.5,937.5 312.5,968.75 " fill="none" stroke-width="2" stroke="rgb(91,158,310)" />
+	<circle cx="260.056" cy="947.93" r="2" fill="rgb(91,158,310)" />
+	<polygon points="250,968.75 250,937.5 281.25,937.5 281.25,968.75 " fill="none" stroke-width="2" stroke="rgb(91,158,310)" />
+	<polygon points="250,1000 250,968.75 281.25,968.75 281.25,1000 " fill="none" stroke-width="2" stroke="rgb(91,158,310)" />
+	<polygon points="281.25,1000 281.25,968.75 312.5,968.75 312.5,1000 " fill="none" stroke-width="2" stroke="rgb(91,158,310)" />
+	<polygon points="250,1000 250,937.5 312.5,937.5 312.5,1000 " fill="none" stroke-width="2" stroke="rgb(143,125,346)" />
+	<circle cx="318.342" cy="949.397" r="2" fill="rgb(143,125,346)" />
+	<polygon points="312.5,1000 312.5,937.5 375,937.5 375,1000 " fill="none" stroke-width="2" stroke="rgb(143,125,346)" />
+	<polygon points="250,1000 250,875 375,875 375,1000 " fill="none" stroke-width="2" stroke="rgb(198,99,332)" />
+	<circle cx="376.456" cy="942.412" r="2" fill="rgb(198,99,332)" />
+	<polygon points="437.5,937.5 437.5,875 500,875 500,937.5 " fill="none" stroke-width="2" stroke="rgb(143,125,346)" />
+	<polygon points="375,937.5 375,875 437.5,875 437.5,937.5 " fill="none" stroke-width="2" stroke="rgb(143,125,346)" />
+	<polygon points="375,1000 375,937.5 437.5,937.5 437.5,1000 " fill="none" stroke-width="2" stroke="rgb(143,125,346)" />
+	<circle cx="495.646" cy="962.338" r="2" fill="rgb(143,125,346)" />
+	<polygon points="468.75,968.75 468.75,937.5 500,937.5 500,968.75 " fill="none" stroke-width="2" stroke="rgb(91,158,310)" />
+	<circle cx="466.398" cy="962.754" r="2" fill="rgb(91,158,310)" />
+	<polygon points="437.5,968.75 437.5,937.5 468.75,937.5 468.75,968.75 " fill="none" stroke-width="2" stroke="rgb(91,158,310)" />
+	<polygon points="437.5,1000 437.5,968.75 468.75,968.75 468.75,1000 " fill="none" stroke-width="2" stroke="rgb(91,158,310)" />
+	<polygon points="468.75,1000 468.75,968.75 500,968.75 500,1000 " fill="none" stroke-width="2" stroke="rgb(91,158,310)" />
+	<polygon points="437.5,1000 437.5,937.5 500,937.5 500,1000 " fill="none" stroke-width="2" stroke="rgb(143,125,346)" />
+	<polygon points="375,1000 375,875 500,875 500,1000 " fill="none" stroke-width="2" stroke="rgb(198,99,332)" />
+	<polygon points="250,1000 250,750 500,750 500,1000 " fill="none" stroke-width="2" stroke="rgb(242,89,270)" />
+	<polygon points="0,1000 0,500 500,500 500,1000 " fill="none" stroke-width="2" stroke="rgb(263,96,178)" />
+	<circle cx="845.539" cy="500.923" r="2" fill="rgb(263,96,178)" />
+	<circle cx="857.108" cy="527.777" r="2" fill="rgb(242,89,270)" />
+	<polygon points="875,625 875,500 1000,500 1000,625 " fill="none" stroke-width="2" stroke="rgb(198,99,332)" />
+	<circle cx="865.84" cy="555.727" r="2" fill="rgb(198,99,332)" />
+	<polygon points="812.5,562.5 812.5,500 875,500 875,562.5 " fill="none" stroke-width="2" stroke="rgb(143,125,346)" />
+	<polygon points="750,562.5 750,500 812.5,500 812.5,562.5 " fill="none" stroke-width="2" stroke="rgb(143,125,346)" />
+	<polygon points="750,625 750,562.5 812.5,562.5 812.5,625 " fill="none" stroke-width="2" stroke="rgb(143,125,346)" />
+	<circle cx="870.999" cy="584.568" r="2" fill="rgb(143,125,346)" />
+	<polygon points="843.75,593.75 843.75,562.5 875,562.5 875,593.75 " fill="none" stroke-width="2" stroke="rgb(91,158,310)" />
+	<polygon points="812.5,593.75 812.5,562.5 843.75,562.5 843.75,593.75 " fill="none" stroke-width="2" stroke="rgb(91,158,310)" />
+	<polygon points="812.5,625 812.5,593.75 843.75,593.75 843.75,625 " fill="none" stroke-width="2" stroke="rgb(91,158,310)" />
+	<circle cx="874.687" cy="613.621" r="2" fill="rgb(91,158,310)" />
+	<polygon points="843.75,625 843.75,593.75 875,593.75 875,625 " fill="none" stroke-width="2" stroke="rgb(91,158,310)" />
+	<polygon points="812.5,625 812.5,562.5 875,562.5 875,625 " fill="none" stroke-width="2" stroke="rgb(143,125,346)" />
+	<polygon points="750,625 750,500 875,500 875,625 " fill="none" stroke-width="2" stroke="rgb(198,99,332)" />
+	<polygon points="750,750 750,625 875,625 875,750 " fill="none" stroke-width="2" stroke="rgb(198,99,332)" />
+	<circle cx="877.245" cy="642.813" r="2" fill="rgb(198,99,332)" />
+	<polygon points="937.5,687.5 937.5,625 1000,625 1000,687.5 " fill="none" stroke-width="2" stroke="rgb(143,125,346)" />
+	<circle cx="878.133" cy="671.708" r="2" fill="rgb(143,125,346)" />
+	<polygon points="906.25,656.25 906.25,625 937.5,625 937.5,656.25 " fill="none" stroke-width="2" stroke="rgb(91,158,310)" />
+	<polygon points="875,656.25 875,625 906.25,625 906.25,656.25 " fill="none" stroke-width="2" stroke="rgb(91,158,310)" />
+	<polygon points="875,687.5 875,656.25 906.25,656.25 906.25,687.5 " fill="none" stroke-width="2" stroke="rgb(91,158,310)" />
+	<circle cx="907.419" cy="671.381" r="2" fill="rgb(91,158,310)" />
+	<polygon points="921.875,671.875 921.875,656.25 937.5,656.25 937.5,671.875 " fill="none" stroke-width="2" stroke="rgb(56,191,231)" />
+	<polygon points="906.25,671.875 906.25,656.25 921.875,656.25 921.875,671.875 " fill="none" stroke-width="2" stroke="rgb(56,191,231)" />
+	<polygon points="906.25,687.5 906.25,671.875 921.875,671.875 921.875,687.5 " fill="none" stroke-width="2" stroke="rgb(56,191,231)" />
+	<circle cx="934.226" cy="681.47" r="2" fill="rgb(56,191,231)" />
+	<polygon points="921.875,687.5 921.875,671.875 937.5,671.875 937.5,687.5 " fill="none" stroke-width="2" stroke="rgb(56,191,231)" />
+	<polygon points="906.25,687.5 906.25,656.25 937.5,656.25 937.5,687.5 " fill="none" stroke-width="2" stroke="rgb(91,158,310)" />
+	<polygon points="875,687.5 875,625 937.5,625 937.5,687.5 " fill="none" stroke-width="2" stroke="rgb(143,125,346)" />
+	<polygon points="875,750 875,687.5 937.5,687.5 937.5,750 " fill="none" stroke-width="2" stroke="rgb(143,125,346)" />
+	<circle cx="951.221" cy="704.694" r="2" fill="rgb(143,125,346)" />
+	<polygon points="968.75,718.75 968.75,687.5 1000,687.5 1000,718.75 " fill="none" stroke-width="2" stroke="rgb(91,158,310)" />
+	<polygon points="937.5,718.75 937.5,687.5 968.75,687.5 968.75,718.75 " fill="none" stroke-width="2" stroke="rgb(91,158,310)" />
+	<circle cx="954.517" cy="733.633" r="2" fill="rgb(91,158,310)" />
+	<polygon points="937.5,750 937.5,718.75 968.75,718.75 968.75,750 " fill="none" stroke-width="2" stroke="rgb(91,158,310)" />
+	<polygon points="968.75,750 968.75,718.75 1000,718.75 1000,750 " fill="none" stroke-width="2" stroke="rgb(91,158,310)" />
+	<polygon points="937.5,750 937.5,687.5 1000,687.5 1000,750 " fill="none" stroke-width="2" stroke="rgb(143,125,346)" />
+	<polygon points="875,750 875,625 1000,625 1000,750 " fill="none" stroke-width="2" stroke="rgb(198,99,332)" />
+	<polygon points="750,750 750,500 1000,500 1000,750 " fill="none" stroke-width="2" stroke="rgb(242,89,270)" />
+	<polygon points="500,750 500,500 750,500 750,750 " fill="none" stroke-width="2" stroke="rgb(242,89,270)" />
+	<circle cx="727.405" cy="931.215" r="2" fill="rgb(242,89,270)" />
+	<polygon points="625,875 625,750 750,750 750,875 " fill="none" stroke-width="2" stroke="rgb(198,99,332)" />
+	<polygon points="500,875 500,750 625,750 625,875 " fill="none" stroke-width="2" stroke="rgb(198,99,332)" />
+	<circle cx="612.211" cy="950.102" r="2" fill="rgb(198,99,332)" />
+	<polygon points="562.5,937.5 562.5,875 625,875 625,937.5 " fill="none" stroke-width="2" stroke="rgb(143,125,346)" />
+	<polygon points="500,937.5 500,875 562.5,875 562.5,937.5 " fill="none" stroke-width="2" stroke="rgb(143,125,346)" />
+	<circle cx="553.902" cy="956.145" r="2" fill="rgb(143,125,346)" />
+	<polygon points="531.25,968.75 531.25,937.5 562.5,937.5 562.5,968.75 " fill="none" stroke-width="2" stroke="rgb(91,158,310)" />
+	<circle cx="524.792" cy="959.314" r="2" fill="rgb(91,158,310)" />
+	<polygon points="500,968.75 500,937.5 531.25,937.5 531.25,968.75 " fill="none" stroke-width="2" stroke="rgb(91,158,310)" />
+	<polygon points="500,1000 500,968.75 531.25,968.75 531.25,1000 " fill="none" stroke-width="2" stroke="rgb(91,158,310)" />
+	<polygon points="531.25,1000 531.25,968.75 562.5,968.75 562.5,1000 " fill="none" stroke-width="2" stroke="rgb(91,158,310)" />
+	<polygon points="500,1000 500,937.5 562.5,937.5 562.5,1000 " fill="none" stroke-width="2" stroke="rgb(143,125,346)" />
+	<circle cx="583.033" cy="953.037" r="2" fill="rgb(143,125,346)" />
+	<polygon points="562.5,1000 562.5,937.5 625,937.5 625,1000 " fill="none" stroke-width="2" stroke="rgb(143,125,346)" />
+	<polygon points="500,1000 500,875 625,875 625,1000 " fill="none" stroke-width="2" stroke="rgb(198,99,332)" />
+	<circle cx="699.412" cy="939.552" r="2" fill="rgb(198,99,332)" />
+	<polygon points="687.5,937.5 687.5,875 750,875 750,937.5 " fill="none" stroke-width="2" stroke="rgb(143,125,346)" />
+	<polygon points="625,937.5 625,875 687.5,875 687.5,937.5 " fill="none" stroke-width="2" stroke="rgb(143,125,346)" />
+	<circle cx="670.493" cy="944.174" r="2" fill="rgb(143,125,346)" />
+	<polygon points="656.25,968.75 656.25,937.5 687.5,937.5 687.5,968.75 " fill="none" stroke-width="2" stroke="rgb(91,158,310)" />
+	<circle cx="641.352" cy="947.36" r="2" fill="rgb(91,158,310)" />
+	<polygon points="625,968.75 625,937.5 656.25,937.5 656.25,968.75 " fill="none" stroke-width="2" stroke="rgb(91,158,310)" />
+	<polygon points="625,1000 625,968.75 656.25,968.75 656.25,1000 " fill="none" stroke-width="2" stroke="rgb(91,158,310)" />
+	<polygon points="656.25,1000 656.25,968.75 687.5,968.75 687.5,1000 " fill="none" stroke-width="2" stroke="rgb(91,158,310)" />
+	<polygon points="625,1000 625,937.5 687.5,937.5 687.5,1000 " fill="none" stroke-width="2" stroke="rgb(143,125,346)" />
+	<polygon points="687.5,1000 687.5,937.5 750,937.5 750,1000 " fill="none" stroke-width="2" stroke="rgb(143,125,346)" />
+	<polygon points="625,1000 625,875 750,875 750,1000 " fill="none" stroke-width="2" stroke="rgb(198,99,332)" />
+	<polygon points="500,1000 500,750 750,750 750,1000 " fill="none" stroke-width="2" stroke="rgb(242,89,270)" />
+	<circle cx="951.379" cy="762.758" r="2" fill="rgb(242,89,270)" />
+	<circle cx="942.767" cy="790.641" r="2" fill="rgb(198,99,332)" />
+	<polygon points="937.5,812.5 937.5,750 1000,750 1000,812.5 " fill="none" stroke-width="2" stroke="rgb(143,125,346)" />
+	<polygon points="875,812.5 875,750 937.5,750 937.5,812.5 " fill="none" stroke-width="2" stroke="rgb(143,125,346)" />
+	<circle cx="925.791" cy="814.368" r="2" fill="rgb(143,125,346)" />
+	<polygon points="906.25,843.75 906.25,812.5 937.5,812.5 937.5,843.75 " fill="none" stroke-width="2" stroke="rgb(91,158,310)" />
+	<circle cx="904.215" cy="834.109" r="2" fill="rgb(91,158,310)" />
+	<polygon points="875,843.75 875,812.5 906.25,812.5 906.25,843.75 " fill="none" stroke-width="2" stroke="rgb(91,158,310)" />
+	<circle cx="879.966" cy="850.496" r="2" fill="rgb(91,158,310)" />
+	<polygon points="875,875 875,843.75 906.25,843.75 906.25,875 " fill="none" stroke-width="2" stroke="rgb(91,158,310)" />
+	<polygon points="906.25,875 906.25,843.75 937.5,843.75 937.5,875 " fill="none" stroke-width="2" stroke="rgb(91,158,310)" />
+	<polygon points="875,875 875,812.5 937.5,812.5 937.5,875 " fill="none" stroke-width="2" stroke="rgb(143,125,346)" />
+	<polygon points="937.5,875 937.5,812.5 1000,812.5 1000,875 " fill="none" stroke-width="2" stroke="rgb(143,125,346)" />
+	<polygon points="875,875 875,750 1000,750 1000,875 " fill="none" stroke-width="2" stroke="rgb(198,99,332)" />
+	<circle cx="854.159" cy="864.309" r="2" fill="rgb(198,99,332)" />
+	<polygon points="750,875 750,750 875,750 875,875 " fill="none" stroke-width="2" stroke="rgb(198,99,332)" />
+	<circle cx="827.086" cy="875.487" r="2" fill="rgb(198,99,332)" />
+	<polygon points="812.5,937.5 812.5,875 875,875 875,937.5 " fill="none" stroke-width="2" stroke="rgb(143,125,346)" />
+	<circle cx="799.277" cy="884.592" r="2" fill="rgb(143,125,346)" />
+	<polygon points="781.25,906.25 781.25,875 812.5,875 812.5,906.25 " fill="none" stroke-width="2" stroke="rgb(91,158,310)" />
+	<circle cx="771.238" cy="892.992" r="2" fill="rgb(91,158,310)" />
+	<polygon points="750,906.25 750,875 781.25,875 781.25,906.25 " fill="none" stroke-width="2" stroke="rgb(91,158,310)" />
+	<circle cx="750.292" cy="913.288" r="2" fill="rgb(91,158,310)" />
+	<polygon points="750,937.5 750,906.25 781.25,906.25 781.25,937.5 " fill="none" stroke-width="2" stroke="rgb(91,158,310)" />
+	<polygon points="781.25,937.5 781.25,906.25 812.5,906.25 812.5,937.5 " fill="none" stroke-width="2" stroke="rgb(91,158,310)" />
+	<polygon points="750,937.5 750,875 812.5,875 812.5,937.5 " fill="none" stroke-width="2" stroke="rgb(143,125,346)" />
+	<polygon points="750,1000 750,937.5 812.5,937.5 812.5,1000 " fill="none" stroke-width="2" stroke="rgb(143,125,346)" />
+	<polygon points="812.5,1000 812.5,937.5 875,937.5 875,1000 " fill="none" stroke-width="2" stroke="rgb(143,125,346)" />
+	<polygon points="750,1000 750,875 875,875 875,1000 " fill="none" stroke-width="2" stroke="rgb(198,99,332)" />
+	<polygon points="875,1000 875,875 1000,875 1000,1000 " fill="none" stroke-width="2" stroke="rgb(198,99,332)" />
+	<polygon points="750,1000 750,750 1000,750 1000,1000 " fill="none" stroke-width="2" stroke="rgb(242,89,270)" />
+	<polygon points="500,1000 500,500 1000,500 1000,1000 " fill="none" stroke-width="2" stroke="rgb(263,96,178)" />
+	<polygon points="0,1000 0,0 1000,0 1000,1000 " fill="none" stroke-width="2" stroke="rgb(255,120,79)" />
+</svg>

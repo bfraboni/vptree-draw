@@ -17,6 +17,10 @@ Dependencies (included in this project)
 
 ![](vptree.png)
 
+<!-- |:---:|:---:|:---:|:---:|:---:|:---:| -->
+![](data/vptree.svg)|![](data/quadtree.svg)|![](data/kdtree.svg)|![](data/bvhbox.svg)|![](data/bvhsphere.svg)|
+
+
 # Building
 
 The project uses [cmake](cmake.org) to build the examples. For
