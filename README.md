@@ -1,4 +1,5 @@
 # vptree-draw
+[![Win/Linux/Mac build](https://github.com/bfraboni/vptree-draw/actions/workflows/cmake.yml/badge.svg)](https://github.com/bfraboni/vptree-draw/actions/workflows/cmake.yml)
 
 `geo.h` minimalist 2D geometry structures (Point, Vector, Box, Sphere)
 
