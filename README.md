@@ -12,6 +12,9 @@
 
 `simple_svg_extend.h` extends simple-svg to support arcs and cavc::PolyLine
 
-Dependencies
+Dependencies (included in this project)
 - Simple SVG drawing library [link](https://github.com/adishavit/simple-svg)
 - Cavaliers contours [link](https://github.com/jbuckmccready/CavalierContours)
+
+**Note**: the `bunny.dat` file must be copied in the same folder as
+the build binaries. 
