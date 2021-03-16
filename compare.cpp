@@ -28,11 +28,16 @@ void initbunny(int dx, int dy, std::vector<geo::Point>& points)
 {
     points.clear();
     std::ifstream file("bunny.dat");
+    if(!file) 
+    {
+        printf("can not open bunny.dat\n");
+        exit(1);
+    }
     geo::Point p;
     while(file)
     {
-        file >> p.x >> p.y;
-        points.push_back(geo::Point(p.x*dx, p.y*dy));
+        if(file >> p.x >> p.y)
+            points.push_back(geo::Point(p.x*dx, p.y*dy));
     }
 }
 
@@ -81,6 +86,19 @@ void initsquare(int dx, int dy, std::vector<geo::Point>& points)
     }
 }
 
+void initrandom(int dx, int dy, std::vector<geo::Point>& points)
+{
+    int nb = 1000;
+    points.clear();
+    points.resize(nb);
+    for(int i = 0; i < nb; ++i)
+    {
+        float x = rand1D();
+        float y = rand1D();
+        points[i] = geo::Point(x*dx, y*dy);
+    }
+}
+
 int main(void)
 {   
     int dx = 1000, dy = 1000;
@@ -91,10 +109,11 @@ int main(void)
 
     // init pointset
     std::vector<geo::Point> v;
-    initbunny(dx,dy,v);
+    // initbunny(dx,dy,v);
     // initdiag(dx,dy,v);
     // initgauss(dx,dy,v);
     // initsquare(dx,dy,v);
+    initrandom(dx,dy,v);
 
     // bvh sphere tree
     svg::Document d1("bvhsphere.svg", layout);

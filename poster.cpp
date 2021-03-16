@@ -28,11 +28,16 @@ void initbunny(int dx, int dy, std::vector<geo::Point>& points)
 {
     points.clear();
     std::ifstream file("bunny.dat");
+    if(!file) 
+    {
+        printf("can not open bunny.dat\n");
+        exit(1);
+    }
     geo::Point p;
     while(file)
     {
-        file >> p.x >> p.y;
-        points.push_back(geo::Point(p.x*dx, p.y*dy));
+        if(file >> p.x >> p.y)
+            points.push_back(geo::Point(p.x*dx, p.y*dy));
     }
 }
 
