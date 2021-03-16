@@ -6,8 +6,6 @@
 #include "quadtree.h"
 #include "vptree.h"
 
-#include "vptree.hpp"
-
 // svg drawing library
 #include "simple_svg_1.0.0.hpp" 
 
@@ -264,106 +262,6 @@ namespace vptree
 
             // draw right subtree
             draw(tree, depth+1, n.right, outside, edgeBuffer, doc);
-
-            // draw left cell (inside)
-            for(int i = 0; i < (int)inside.shape.size(); ++i)
-            {
-                doc << svg::CavcPoly(inside.shape[i], svg::Fill(), edgeBuffer, svg::Stroke(2, color));
-            }
-
-            // draw right cell (outside)
-            for(int i = 0; i < (int)outside.shape.size(); ++i)
-            {
-                doc << svg::CavcPoly(outside.shape[i], svg::Fill(), edgeBuffer, svg::Stroke(2, color));
-            }    
-        }
-    }
-}
-
-namespace vpt
-{
-    struct Cell
-    {
-        std::vector<cavc::Polyline<double>> shape;
-        std::vector<cavc::Polyline<double>> holes;
-    };
-
-    void draw(
-        const vpt::VpTree& vptree, 
-        int depth, 
-        int node, 
-        const Cell& cell,
-        std::vector<svg::CavcPoly::Edge> &edgeBuffer, 
-        svg::Document& doc
-    )
-    {
-        if(node == vpt::VpTree::Node::Leaf)
-            return;
-
-        // get cell vantage circle info
-        const auto& n = vptree.nodes_[node];
-        double radius = n.threshold;
-        double cx = vptree.items_[n.item].first[0];
-        double cy = vptree.items_[n.item].first[1];
-        
-        // hue rotated color 
-        svg::Color color = rotate(svg::Color(255,120,80), depth*30);
-        // std::cout << "depth: " << depth << " " << node << " " << n.left << " " << n.right << std::endl;
-        // std::cout << "circle: " << cx << " " << cy << " " << radius << std::endl;
-
-        // on a leaf
-        if( radius <= 0 )
-        {
-            // draw vantage point
-            doc << svg::Circle(svg::Point(cx, cy), 4, svg::Fill(color), svg::Stroke());
-        }
-        // on a node
-        else
-        {
-            // closed polyline of the vantage circle
-            cavc::Polyline<double> circle;
-            circle.addVertex(cx-radius, cy, 1);
-            circle.addVertex(cx+radius, cy, 1);
-            circle.isClosed() = true;
-
-            // compute intersection with enclosing path
-            Cell inside;
-            for(int i = 0; i < (int)cell.shape.size(); ++i)
-            {
-                cavc::CombineResult<double> inter = combinePolylines(cell.shape[i], circle, cavc::PlineCombineMode::Intersect);
-                // std::cout << "intersect: " << inter.remaining.size() << " remains " << inter.subtracted.size() << " holes " << std::endl;
-                if( inter.remaining.size() > 0 )
-                {
-                    inside.shape.insert(inside.shape.end(), inter.remaining.begin(), inter.remaining.end());
-                }
-            }
-
-            // compute exclusion with enclosing path
-            Cell outside;
-            for(int i = 0; i < (int)cell.shape.size(); ++i)
-            {
-                cavc::CombineResult<double> exclu = combinePolylines(cell.shape[i], circle, cavc::PlineCombineMode::Exclude);
-                // std::cout << "exclude: " << exclu.remaining.size() << " remains " << exclu.subtracted.size() << " holes " << std::endl;
-                if( exclu.remaining.size() > 0 )
-                {
-                    outside.shape.insert(outside.shape.end(), exclu.remaining.begin(), exclu.remaining.end());
-                }
-
-                // if there is a hole -> TODO
-                if( exclu.subtracted.size() > 0 )
-                {
-                    outside.holes.insert(outside.holes.end(), exclu.subtracted.begin(), exclu.subtracted.end());
-                }
-            }
-
-            // draw circle center
-            doc << svg::Circle(svg::Point(cx, cy), 4, svg::Fill(color), svg::Stroke());
-
-            // draw left subtree
-            draw(vptree, depth+1, n.left, inside, edgeBuffer, doc);
-
-            // draw right subtree
-            draw(vptree, depth+1, n.right, outside, edgeBuffer, doc);
 
             // draw left cell (inside)
             for(int i = 0; i < (int)inside.shape.size(); ++i)
