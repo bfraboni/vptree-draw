@@ -15,11 +15,13 @@ Dependencies (included in this project)
 - Simple SVG drawing library [link](https://github.com/adishavit/simple-svg)
 - Cavaliers contours [link](https://github.com/jbuckmccready/CavalierContours)
 
-![](vptree.png)
+<!-- ![](vptree.png) -->
 
-<!-- |:---:|:---:|:---:|:---:|:---:|:---:| -->
-![](data/vptree.svg)|![](data/quadtree.svg)|![](data/kdtree.svg)|![](data/bvhbox.svg)|![](data/bvhsphere.svg)|
+|Vantage points tree|Quadtree|KD tree|BVH box|BVH sphere|
+|:---:|:---:|:---:|:---:|:---:|
+| ![](data/vptree.svg) | ![](data/quadtree.svg) | ![](data/kdtree.svg) | ![](data/bvhbox.svg) | ![](data/bvhsphere.svg) |
 
+![poster](data/poster.svg)
 
 # Building
 
