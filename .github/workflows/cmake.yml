@@ -1,4 +1,4 @@
-name: Linux/Mac build
+name: Win/Linux/Mac build
 
 on: [push]
 
