@@ -17,16 +17,7 @@
 - Simple SVG drawing library [link](https://github.com/adishavit/simple-svg)
 - Cavaliers contours [link](https://github.com/jbuckmccready/CavalierContours)
 
-<!-- ![](vptree.png) -->
-
-|Vantage points tree|Quadtree|KD tree|BVH box|BVH sphere|
-|:---:|:---:|:---:|:---:|:---:|
-| ![](data/vptree.svg) | ![](data/quadtree.svg) | ![](data/kdtree.svg) | ![](data/bvhbox.svg) | ![](data/bvhsphere.svg) |
-
-Large poster with all methods
-![](data/poster.svg)
-
-## Building
+## Build
 
 The project uses [cmake](cmake.org) to build the examples. For
 instance (linux/mac):
@@ -40,3 +31,13 @@ make
 
 **Note**: the `bunny.dat` file must be copied in the same folder as
 the build binaries.
+
+## Examples
+
+|Vantage points tree|Quadtree|KD tree|BVH box|BVH sphere|
+|:---:|:---:|:---:|:---:|:---:|
+| ![](data/vptree.svg) | ![](data/quadtree.svg) | ![](data/kdtree.svg) | ![](data/bvhbox.svg) | ![](data/bvhsphere.svg) |
+
+Large poster with all methods
+![](data/poster.svg)
+
