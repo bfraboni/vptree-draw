@@ -34,7 +34,7 @@ the build binaries.
 
 ## Examples
 
-|Vantage points tree|Quadtree|KD tree|BVH box|BVH sphere|
+| VP tree |Quadtree | KD tree | BVH box |BVH sphere|
 |:---:|:---:|:---:|:---:|:---:|
 | ![](data/vptree.svg) | ![](data/quadtree.svg) | ![](data/kdtree.svg) | ![](data/bvhbox.svg) | ![](data/bvhsphere.svg) |
 
