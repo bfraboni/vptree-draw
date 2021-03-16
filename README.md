@@ -2,6 +2,7 @@
 [![Win/Linux/Mac build](https://github.com/bfraboni/vptree-draw/actions/workflows/cmake.yml/badge.svg)](https://github.com/bfraboni/vptree-draw/actions/workflows/cmake.yml)
 
 ## Code structure
+
 - `geo.h` minimalist 2D geometry structures (Point, Vector, Box, Sphere)
 - `bvhsphere.h` minimalist bounding sphere hierarchy
 - `bvhbox.h` minimalist bounding box hierarchy
@@ -11,7 +12,8 @@
 - `draw.h` tree to SVG draw functions 
 - `simple_svg_extend.h` extends Simple SVG to support arcs and cavc::PolyLine
 
-## Dependencies (included in this project)
+## Dependencies 
+(included in this project)
 - Simple SVG drawing library [link](https://github.com/adishavit/simple-svg)
 - Cavaliers contours [link](https://github.com/jbuckmccready/CavalierContours)
 
