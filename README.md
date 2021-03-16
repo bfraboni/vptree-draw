@@ -21,7 +21,8 @@ Dependencies (included in this project)
 |:---:|:---:|:---:|:---:|:---:|
 | ![](data/vptree.svg) | ![](data/quadtree.svg) | ![](data/kdtree.svg) | ![](data/bvhbox.svg) | ![](data/bvhsphere.svg) |
 
-![poster](data/poster.svg)
+Large poster with all methods
+![](data/poster.svg)
 
 # Building
 
