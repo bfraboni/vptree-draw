@@ -12,6 +12,8 @@
 // polyline contour intersections
 #include "cavc/polylinecombine.hpp"
 
+#define _USE_MATH_DEFINES
+#include <cmath>
 // polyline contour svg drawing
 #include "simple_svg_extend.h" 
 
