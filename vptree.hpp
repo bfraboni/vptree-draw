@@ -139,8 +139,8 @@ public:
 template<typename InputIterator>
 VpTree::VpTree(InputIterator start, InputIterator end, Metric metric)
 : getDistance(metric), items_(makeItems(start, end)), nodes_(), rng_() {
-    std::random_device rd;
-    rng_.seed(rd());
+    // std::random_device rd;
+    // rng_.seed(rd());
     nodes_.reserve(items_.size());
     makeTree(0, items_.size());
 }

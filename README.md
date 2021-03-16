@@ -1,1 +1,17 @@
 # vptree-draw
+
+`geo.h` minimalist 2D geometry structures (Point, Vector, Box, Sphere)
+
+`bvhsphere.h` minimalist bounding sphere hierarchy
+`bvhbox.h` minimalist bounding box hierarchy
+`kdtree.h` minimalist kd tree
+`quadtree.h` minimalist quadtree
+`vptree.h` minimalist vantage points tree
+
+`draw.h` tree to SVG draw functions 
+
+`simple_svg_extend.h` extends simple-svg to support arcs and cavc::PolyLine
+
+Dependencies
+- Simple SVG drawing library [link](https://github.com/adishavit/simple-svg)
+- Cavaliers contours [link](https://github.com/jbuckmccready/CavalierContours)
