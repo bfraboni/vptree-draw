@@ -1,6 +1,8 @@
 # vptree-draw
 [![Win/Linux/Mac build](https://github.com/bfraboni/vptree-draw/actions/workflows/cmake.yml/badge.svg)](https://github.com/bfraboni/vptree-draw/actions/workflows/cmake.yml)
 
+SVG export of several 2D space partitioning structures.
+
 ## Code structure
 
 - `geo.h` minimalist 2D geometry structures (Point, Vector, Box, Sphere)
@@ -46,7 +48,7 @@ the build binaries.
 
 Basile Fraboni, LIRIS, INSA Lyon, Université Claude Bernard Lyon 1
 
-David CoeurjoLly, CNRS, LIRIS
+David Coeurjolly, CNRS, LIRIS
 
 ## License
 
