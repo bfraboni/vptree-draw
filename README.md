@@ -45,6 +45,7 @@ the build binaries.
 ## Contributors
 
 Basile Fraboni, LIRIS, INSA Lyon, Université Claude Bernard Lyon 1
+
 David CoeurjoLly, CNRS, LIRIS
 
 ## License
