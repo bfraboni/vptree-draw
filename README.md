@@ -34,7 +34,7 @@ the build binaries.
 
 ## Examples
 
-| VP tree |Quadtree | KD tree | BVH box |BVH sphere|
+|VP tree|Quadtree|KD tree|BVH box |BVH sphere|
 |:---:|:---:|:---:|:---:|:---:|
 | ![](data/vptree.svg) | ![](data/quadtree.svg) | ![](data/kdtree.svg) | ![](data/bvhbox.svg) | ![](data/bvhsphere.svg) |
 
@@ -42,3 +42,11 @@ the build binaries.
 |:---:|
 |![](data/poster.svg)|
 
+## Contributors
+
+Basile Fraboni, LIRIS, INSA Lyon, Université Claude Bernard Lyon 1
+David CoeurjoLly, CNRS, LIRIS
+
+## License
+
+You may use, distribute and modify this code under the terms of the MIT license. For further details please refer to : https://mit-license.org/
