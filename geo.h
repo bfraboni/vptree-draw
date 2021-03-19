@@ -73,6 +73,11 @@ namespace geo
         return std::sqrt((a.x - b.x)*(a.x - b.x) + (a.y - b.y)*(a.y - b.y));
     }
 
+    float distance2(const vec2& a, const vec2& b)
+    {
+        return ((a.x - b.x)*(a.x - b.x) + (a.y - b.y)*(a.y - b.y));
+    }
+
     vec2 min( const vec2& a, const vec2& b )
     {
         return vec2( std::min(a.x, b.x), std::min(a.y, b.y) );

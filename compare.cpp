@@ -12,6 +12,7 @@
 #include "kdtree.h"
 #include "quadtree.h"
 #include "vptree.h"
+#include "bvptree.h"
 #include "draw.h"
 
 static float rand1D() 
@@ -88,7 +89,7 @@ void initsquare(int dx, int dy, std::vector<geo::Point>& points)
 
 void initrandom(int dx, int dy, std::vector<geo::Point>& points)
 {
-    int nb = 1000;
+    int nb = 10;
     points.clear();
     points.resize(nb);
     for(int i = 0; i < nb; ++i)
@@ -109,11 +110,11 @@ int main(void)
 
     // init pointset
     std::vector<geo::Point> v;
-    // initbunny(dx,dy,v);
+    initbunny(dx,dy,v);
     // initdiag(dx,dy,v);
     // initgauss(dx,dy,v);
     // initsquare(dx,dy,v);
-    initrandom(dx,dy,v);
+    // initrandom(dx,dy,v);
 
     // bvh sphere tree
     svg::Document d1("bvhsphere.svg", layout);
@@ -160,6 +161,24 @@ int main(void)
     std::vector<svg::CavcPoly::Edge> buffer;
     vptree::draw(vp, 0, vp.root, cell, buffer, d5);
     d5.save();
+
+    // bregman vp tree
+    // disclaimer: 
+    // - not very robust cell outlines (hack in bvptree.h function geo::ball)
+    // - reasonable for 100 points 
+    // - 1000 starts to be long 
+    if( 0 )
+    {
+        svg::Document d6("bvptree.svg", layout);
+        d6 << bg;
+        bvptree::Tree bvp(v);
+        bvptree::Cell bcell;
+        bcell.shape.push_back(bounds);
+        // init edge structure
+        buffer.clear();
+        bvptree::draw(bvp, 0, bvp.root, bcell, buffer, d6);
+        d6.save();
+    }
 
     return 0;
 }

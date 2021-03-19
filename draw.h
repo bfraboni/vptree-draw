@@ -5,6 +5,7 @@
 #include "kdtree.h"
 #include "quadtree.h"
 #include "vptree.h"
+#include "bvptree.h"
 
 // svg drawing library
 #include "simple_svg_1.0.0.hpp" 
@@ -305,6 +306,165 @@ namespace vptree
                 for(int i = 0; i < (int)cell.shape.size(); ++i)
                 {
                     cavc::CombineResult<double> exclu = combinePolylines(cell.shape[i], circle, cavc::PlineCombineMode::Exclude);
+                    // std::cout << "exclude: " << exclu.remaining.size() << " remains " << exclu.subtracted.size() << " holes " << std::endl;
+                    outside.shape.insert(outside.shape.end(), exclu.remaining.begin(), exclu.remaining.end());
+                    outside.holes.insert(outside.holes.end(), exclu.subtracted.begin(), exclu.subtracted.end());
+                }
+            }
+
+            // draw circle center
+            doc << svg::Circle(svg::Point(cx, cy), 4, svg::Fill(color), svg::Stroke());
+
+            // draw left subtree
+            draw(tree, depth+1, n.left, inside, edgeBuffer, doc);
+
+            // draw right subtree
+            draw(tree, depth+1, n.right, outside, edgeBuffer, doc);
+
+            // draw left cell (inside)
+            for(int i = 0; i < (int)inside.shape.size(); ++i)
+            {
+                doc << svg::CavcPoly(inside.shape[i], svg::Fill(), edgeBuffer, svg::Stroke(2, color));
+            }
+
+            // draw right cell (outside)
+            for(int i = 0; i < (int)outside.shape.size(); ++i)
+            {
+                doc << svg::CavcPoly(outside.shape[i], svg::Fill(), edgeBuffer, svg::Stroke(2, color));
+            }    
+        }
+    }
+}
+
+namespace bvptree
+{
+    struct Cell
+    {
+        std::vector<cavc::Polyline<double>> shape;
+        std::vector<cavc::Polyline<double>> holes;
+    };
+
+    void draw(
+        const bvptree::Tree& tree, 
+        int depth, 
+        int node, 
+        const Cell& cell,
+        std::vector<svg::CavcPoly::Edge> &edgeBuffer, 
+        svg::Document& doc
+    )
+    {
+        if(node < 0) return;
+
+        // get cell vantage circle info
+        const auto& n = tree.nodes[node];
+        double radius = n.r;
+        double cx = tree.points[n.id][0];
+        double cy = tree.points[n.id][1];
+        
+        // hue rotated color 
+        svg::Color color = rotate(svg::Color(255,120,80), depth*30);
+        // std::cout << "depth: " << depth << " " << node << " " << n.left << " " << n.right << std::endl;
+        // std::cout << "circle: " << cx << " " << cy << " " << radius << std::endl;
+
+        // on a leaf
+        if( radius <= 0 )
+        {
+            // draw vantage point
+            doc << svg::Circle(svg::Point(cx, cy), 4, svg::Fill(color), svg::Stroke());
+        }
+        // on a node
+        else
+        {
+            // closed polyline of the vantage bball
+            cavc::Polyline<double> bball;
+            geo::Point p(cx, cy);
+            float tau = radius;
+            std::vector<geo::Point> v = geo::ball(p, tau, geo::BregmanKL());
+            if( v.empty() ) return;
+            std::vector<geo::Point> hull = geo::hull(v);
+            for(const auto& p : hull)
+                bball.addVertex(p.x, p.y, 0);
+            bball.isClosed() = true;
+
+            Cell inside, outside;
+            // hole handling
+            if( cell.holes.size() > 0 )
+            {
+                for(int i = 0; i < (int)cell.holes.size(); ++i)
+                {
+                    cavc::CombineResult<double> interHoleCircle = combinePolylines(cell.holes[i], bball, cavc::PlineCombineMode::Intersect);
+                    // if hole and bball intersects the hole will be removed next
+                    if( interHoleCircle.remaining.size() > 0 )
+                    {
+                        // intersect with enclosing path
+                        for(int j = 0; j < (int)cell.shape.size(); ++j)
+                        {
+                            // intersect with enclosing path
+                            cavc::CombineResult<double> interShapeCircle = combinePolylines(cell.shape[j], bball, cavc::PlineCombineMode::Intersect);
+                            // std::cout << "hole but intersect: " << interShapeCircle.remaining.size() << " remains " << interShapeCircle.subtracted.size() << " holes " << std::endl;
+                            for(auto& path : interShapeCircle.remaining)
+                            {
+                                // remove hole from new outlines
+                                cavc::CombineResult<double> excluNewShapeHole = combinePolylines(path, cell.holes[i], cavc::PlineCombineMode::Exclude);
+                                inside.shape.insert(inside.shape.end(), excluNewShapeHole.remaining.begin(), excluNewShapeHole.remaining.end());
+                                inside.holes.insert(inside.holes.end(), excluNewShapeHole.subtracted.begin(), excluNewShapeHole.subtracted.end());
+                            }
+                        }
+
+                        // compute exclusion with enclosing path
+                        for(int j = 0; j < (int)cell.shape.size(); ++j)
+                        {
+                            cavc::CombineResult<double> excluShapeCircle = combinePolylines(cell.shape[j], bball, cavc::PlineCombineMode::Exclude);
+                            // std::cout << "hole but exclude: " << excluShapeCircle.remaining.size() << " remains " << excluShapeCircle.subtracted.size() << " holes " << std::endl;
+                            for(auto& path : excluShapeCircle.remaining)
+                            {
+                                // remove hole from new outlines
+                                cavc::CombineResult<double> excluNewShapeHole = combinePolylines(path, cell.holes[i], cavc::PlineCombineMode::Exclude);
+                                outside.shape.insert(outside.shape.end(), excluNewShapeHole.remaining.begin(), excluNewShapeHole.remaining.end());
+                                outside.holes.insert(outside.holes.end(), excluNewShapeHole.subtracted.begin(), excluNewShapeHole.subtracted.end());
+                            }
+                        }
+                    }
+                    // else the hole wil remain at next level
+                    else
+                    {
+                        outside.holes.push_back(cell.holes[i]);
+
+                        // compute intersection with enclosing path
+                        for(int j = 0; j < (int)cell.shape.size(); ++j)
+                        {
+                            cavc::CombineResult<double> inter = combinePolylines(cell.shape[j], bball, cavc::PlineCombineMode::Intersect);
+                            // std::cout << "hole but do not intersect: " << inter.remaining.size() << " remains " << inter.subtracted.size() << " holes " << std::endl;
+                            inside.shape.insert(inside.shape.end(), inter.remaining.begin(), inter.remaining.end());
+                            inside.holes.insert(inside.holes.end(), inter.subtracted.begin(), inter.subtracted.end());
+                        }
+
+                        // compute exclusion with enclosing path
+                        for(int j = 0; j < (int)cell.shape.size(); ++j)
+                        {
+                            cavc::CombineResult<double> exclu = combinePolylines(cell.shape[j], bball, cavc::PlineCombineMode::Exclude);
+                            // std::cout << "hole but do not exclude: " << exclu.remaining.size() << " remains " << exclu.subtracted.size() << " holes " << std::endl;
+                            outside.shape.insert(outside.shape.end(), exclu.remaining.begin(), exclu.remaining.end());
+                            outside.holes.insert(outside.holes.end(), exclu.subtracted.begin(), exclu.subtracted.end());
+                        }
+                    }
+                }
+            }
+            else
+            {
+                // compute intersection with enclosing path
+                for(int i = 0; i < (int)cell.shape.size(); ++i)
+                {
+                    cavc::CombineResult<double> inter = combinePolylines(cell.shape[i], bball, cavc::PlineCombineMode::Intersect);
+                    // std::cout << "intersect: " << inter.remaining.size() << " remains " << inter.subtracted.size() << " holes " << std::endl;
+                    inside.shape.insert(inside.shape.end(), inter.remaining.begin(), inter.remaining.end());
+                    inside.holes.insert(inside.holes.end(), inter.subtracted.begin(), inter.subtracted.end());
+                }
+
+                // compute exclusion with enclosing path
+                for(int i = 0; i < (int)cell.shape.size(); ++i)
+                {
+                    cavc::CombineResult<double> exclu = combinePolylines(cell.shape[i], bball, cavc::PlineCombineMode::Exclude);
                     // std::cout << "exclude: " << exclu.remaining.size() << " remains " << exclu.subtracted.size() << " holes " << std::endl;
                     outside.shape.insert(outside.shape.end(), exclu.remaining.begin(), exclu.remaining.end());
                     outside.holes.insert(outside.holes.end(), exclu.subtracted.begin(), exclu.subtracted.end());
