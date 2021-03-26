@@ -11,8 +11,9 @@ SVG export of several 2D space partitioning structures.
 - `kdtree.h` minimalist kd tree
 - `quadtree.h` minimalist quadtree
 - `vptree.h` minimalist vantage points tree
+- `bvptree.h` minimalist Bregman Kullback-Leibler vantage points tree
 - `draw.h` tree to SVG draw functions 
-- `simple_svg_extend.h` extends Simple SVG to support arcs and cavc::PolyLine
+- `simple_svg_extend.h` extends Simple SVG to support arcs and cavc::PolyLine (aka: bulge paths)
 
 ## Dependencies 
 (included in this project)
