@@ -6,6 +6,7 @@
 #include <cmath>
 
 #include "geo.h"
+#include "lambert.h"
 
 namespace geo
 {
@@ -21,7 +22,7 @@ namespace geo
     template<typename Divergence>
     std::vector<Point> ball(const geo::Point& p, float tau, Divergence d)
     {
-        int grid = 2000;
+        int grid = 4000;
         float size = std::max(100.f,1000 * std::log(tau));
         std::vector<geo::Point> v;
         for(int i = -grid/2; i < grid/2; i++)
@@ -121,6 +122,54 @@ namespace geo
             stack.pop();
         }
         return v;
+    }
+
+    std::vector<geo::Point> klball(const geo::Point& p, float tau)
+    {
+        int nbsteps=250;
+        std::vector<geo::Point> output(nbsteps*4);
+        float du=tau/(float)nbsteps;
+
+        // parametric: x1, y1, x2, y2
+            // x1=-p.x*func::LambertW0(-std::exp(-u/p.x-1));
+            // y1=-p.y*func::LambertW0(-std::exp(-(tau-u)/p.y-1));
+            // x2=-p.x*func::LambertWm1(-std::exp(-u/p.x-1));
+            // y2=-p.y*func::LambertWm1(-std::exp(-(tau-u)/p.y-1));
+        
+        // top left quadrant: (x1, y2)
+        for (int i=0; i<=nbsteps; ++i)
+        {
+            float u = tau-i * du;
+            float x=-p.x*func::LambertW0(-std::exp(-u/p.x-1));
+            float y=-p.y*func::LambertWm1(-std::exp(-(tau-u)/p.y-1));
+            output[i] = geo::Point(x,y);
+        }
+        // top right quadrant: (x2, y2)
+        for (int i=0; i<=nbsteps; ++i)
+        {
+            float u = i * du;
+            float x=-p.x*func::LambertWm1(-std::exp(-u/p.x-1));
+            float y=-p.y*func::LambertWm1(-std::exp(-(tau-u)/p.y-1));
+            output[nbsteps+i] = geo::Point(x,y);
+        }
+        // bottom right quadrant: (x2, y1)
+        for (int i=0; i<=nbsteps; ++i)
+        {
+            float u = tau-i * du;
+            float x=-p.x*func::LambertWm1(-std::exp(-u/p.x-1));
+            float y=-p.y*func::LambertW0(-std::exp(-(tau-u)/p.y-1));
+            output[2*nbsteps+i] = geo::Point(x,y);
+        }
+        // bottom left quadrant: (x1, y1)
+        for (int i=0; i<=nbsteps; ++i)
+        {
+            float u = i * du;
+            float x=-p.x*func::LambertW0(-std::exp(-u/p.x-1));
+            float y=-p.y*func::LambertW0(-std::exp(-(tau-u)/p.y-1));
+            output[3*nbsteps+i] = geo::Point(x,y);
+        }
+        
+        return output;
     }
 }
 
