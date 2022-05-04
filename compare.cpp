@@ -19,7 +19,7 @@ static float rand1D()
 {   
     using G = std::default_random_engine;    
     using D = std::uniform_real_distribution<float>; 
-    static const std::size_t seed = 123456789;   
+    static const std::size_t seed = 1255456789;   
     static G gen(seed);
     static D dist(0.f, 1.f);
     return dist(gen);
@@ -102,10 +102,18 @@ void initrandom(int dx, int dy, std::vector<geo::Point>& points)
 
 int main(void)
 {   
+    // color params
+    const svg::Color bgcolor(255,255,255);      // backgournd
+    const svg::Color treecolor(255,76,23);      // base color for the tree cells
+    const bool rainbow = true;                  // hue rotate colors at each level if true
+    // const svg::Color bgcolor(255,255,255);   // backgournd
+    // const svg::Color treecolor(35,35,35);    // base color for the tree cells
+    // const bool rainbow = true;               // hue rotate colors at each level if true
+
     int dx = 1000, dy = 1000;
     svg::Dimensions dimensions(dx, dy);
     svg::Layout layout(dimensions, svg::Layout::BottomLeft);
-    svg::Polygon bg(svg::Fill(svg::Color(255, 255, 255)), svg::Stroke());
+    svg::Polygon bg((svg::Fill(bgcolor)), svg::Stroke());
     bg << svg::Point(0, 0) << svg::Point(dimensions.width, 0) << svg::Point(dimensions.width, dimensions.height) << svg::Point(0, dimensions.height);
 
     // init pointset
@@ -120,28 +128,28 @@ int main(void)
     svg::Document d1("bvhsphere.svg", layout);
     d1 << bg;
     bvhsphere::Tree bsh(v);
-    bvhsphere::draw(bsh, 0, bsh.root, d1);
+    bvhsphere::draw(bsh, 0, bsh.root, d1, treecolor, rainbow);
     d1.save();
 
     // bvh box tree
     svg::Document d2("bvhbox.svg", layout);
     d2 << bg;
     bvhbox::Tree bbh(v);
-    bvhbox::draw(bbh, 0, bbh.root, d2);
+    bvhbox::draw(bbh, 0, bbh.root, d2, treecolor, rainbow);
     d2.save();
 
     // quad tree
     svg::Document d3("quadtree.svg", layout);
     d3 << bg;
     quadtree::Tree qt(v, geo::Box(geo::Point(0,0), geo::Point(dx, dy)));
-    quadtree::draw(qt, 0, qt.root, d3);
+    quadtree::draw(qt, 0, qt.root, d3, treecolor, rainbow);
     d3.save();
 
     // kd tree
     svg::Document d4("kdtree.svg", layout);
     d4 << bg;
     kdtree::Tree kd(v);
-    kdtree::draw(kd, 0, kd.root, geo::Point(0,0), geo::Point(dx, dy), d4);
+    kdtree::draw(kd, 0, kd.root, geo::Point(0,0), geo::Point(dx, dy), d4, treecolor, rainbow);
     d4.save();
     
     // vp tree 
@@ -159,15 +167,12 @@ int main(void)
     cell.shape.push_back(bounds);
     // init edge structure
     std::vector<svg::CavcPoly::Edge> buffer;
-    vptree::draw(vp, 0, vp.root, cell, buffer, d5);
+    vptree::draw(vp, 0, vp.root, cell, buffer, d5, treecolor, rainbow);
     d5.save();
 
     // bregman vp tree
-    // disclaimer: 
-    // - not very robust cell outlines (hack in bvptree.h function geo::ball)
-    // - reasonable for 100 points 
-    // - 1000 starts to be long 
-    if( 0 )
+    // now robust using Frank Nielsen's parametric form of Bregman balls
+    if( 1 )
     {
         svg::Document d6("bvptree.svg", layout);
         d6 << bg;
@@ -176,7 +181,7 @@ int main(void)
         bcell.shape.push_back(bounds);
         // init edge structure
         buffer.clear();
-        bvptree::draw(bvp, 0, bvp.root, bcell, buffer, d6);
+        bvptree::draw(bvp, 0, bvp.root, bcell, buffer, d6, treecolor, rainbow);
         d6.save();
     }
 

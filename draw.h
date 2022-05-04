@@ -27,19 +27,20 @@ svg::Color rotate( const svg::Color &in, double hue)
     double res[3] = {
         ((.299+.701*U+.168*W)*rgb[0] + (.587-.587*U+.330*W)*rgb[1] + (.114-.114*U-.497*W)*rgb[2])*255.,
         ((.299-.299*U-.328*W)*rgb[0] + (.587+.413*U+.035*W)*rgb[1] + (.114-.114*U+.292*W)*rgb[2])*255.,
-        ((.299-.3*U+1.25*W)*rgb[0] + (.587-.588*U-1.05*W)*rgb[1] + (.114+.886*U-.203*W)*rgb[2])*255.
+        ((.299-.3*U+1.25*W)*rgb[0]   + (.587-.588*U-1.05*W)*rgb[1] + (.114+.886*U-.203*W)*rgb[2])*255.
     };
     return svg::Color(res[0], res[1], res[2]);
 }
 
 namespace bvhsphere
 {
-    void draw( const bvhsphere::Tree& tree, int depth, int node, svg::Document& doc)
+    void draw( const bvhsphere::Tree& tree, int depth, int node, svg::Document& doc, svg::Color color = svg::Color(255,76,23), bool rainbow = true)
     {
         const auto& n = tree.nodes[node];
         
-        // hue rotated color 
-        svg::Color color = rotate(svg::Color(255,120,80), depth*30);
+        // hue rotated color
+        if( rainbow ) 
+            color = rotate(color, depth*30);
 
         // if leaf
         if(n.leaf())
@@ -64,22 +65,23 @@ namespace bvhsphere
             doc << svg::Circle(svg::Point(p.x, p.y), diameter, svg::Fill(), svg::Stroke(2, color));
 
             // draw left subtree
-            draw(tree, depth+1, n.left, doc);
+            draw(tree, depth+1, n.left, doc, color, rainbow);
 
             // draw right subtree
-            draw(tree, depth+1, n.right, doc);
+            draw(tree, depth+1, n.right, doc, color, rainbow);
         }
     }
 }
 
 namespace bvhbox
 {
-    void draw(const bvhbox::Tree& tree, int depth, int node, svg::Document& doc)
+    void draw(const bvhbox::Tree& tree, int depth, int node, svg::Document& doc, svg::Color color = svg::Color(255,76,23), bool rainbow = true)
     {
         const auto& n = tree.nodes[node];
         
-        // hue rotated color 
-        svg::Color color = rotate(svg::Color(255,120,80), depth*30);
+        // hue rotated color
+        if( rainbow ) 
+            color = rotate(color, depth*30);
 
         // if leaf
         if(n.leaf())
@@ -105,24 +107,25 @@ namespace bvhbox
             doc << poly;
 
             // draw left subtree
-            draw(tree, depth+1, n.left, doc);
+            draw(tree, depth+1, n.left, doc, color, rainbow);
 
             // draw right subtree
-            draw(tree, depth+1, n.right, doc);
+            draw(tree, depth+1, n.right, doc, color, rainbow);
         }
     }
 }
 
 namespace kdtree
 {
-    void draw(const kdtree::Tree& tree, int depth, int node, geo::Point pmin, geo::Point pmax, svg::Document& doc)
+    void draw(const kdtree::Tree& tree, int depth, int node, geo::Point pmin, geo::Point pmax, svg::Document& doc, svg::Color color = svg::Color(255,76,23), bool rainbow = true)
     {
         if( node < 0 ) return;
 
         const auto& n = tree.nodes[node];
         
-        // hue rotated color 
-        svg::Color color = rotate(svg::Color(255,120,80), depth*30);
+        // hue rotated color
+        if( rainbow ) 
+            color = rotate(color, depth*30);
 
         const auto& p = tree.points[n.id];
         doc << svg::Circle(svg::Point(p.x, p.y), 4, svg::Fill(color), svg::Stroke());
@@ -138,21 +141,22 @@ namespace kdtree
 
         doc << svg::Line(svg::Point(p0.x, p0.y), svg::Point(p1.x, p1.y), svg::Stroke(2, color));
 
-        draw(tree, depth+1, n.left, pmin, p1, doc);
-        draw(tree, depth+1, n.right, p0, pmax, doc);
+        draw(tree, depth+1, n.left, pmin, p1, doc, color, rainbow);
+        draw(tree, depth+1, n.right, p0, pmax, doc, color, rainbow);
     }
 }
 
 namespace quadtree
 {
-    void draw(const quadtree::Tree& tree, int depth, int node, svg::Document& doc)
+    void draw(const quadtree::Tree& tree, int depth, int node, svg::Document& doc, svg::Color color = svg::Color(255,76,23), bool rainbow = true)
     {
         if( node < 0 ) return;
 
         const auto& n = tree.nodes[node];
         
-        // hue rotated color 
-        svg::Color color = rotate(svg::Color(255,120,80), depth*30);
+        // hue rotated color
+        if( rainbow ) 
+            color = rotate(color, depth*30);
 
         // std::cout << "depth: " << depth << " " << node << " " << n.ne << " " << n.nw << " " << n.sw << " " << n.se << std::endl;
         if( !n.leaf() )
@@ -163,13 +167,13 @@ namespace quadtree
             // std::cout << "circle: " << p.x << " " << p.y << std::endl;
 
             // draw north east subtree
-            draw(tree, depth+1, n.ne, doc);
+            draw(tree, depth+1, n.ne, doc, color, rainbow);
             // draw north west subtree
-            draw(tree, depth+1, n.nw, doc);
+            draw(tree, depth+1, n.nw, doc, color, rainbow);
             // draw south west subtree
-            draw(tree, depth+1, n.sw, doc);
+            draw(tree, depth+1, n.sw, doc, color, rainbow);
             // draw south east subtree
-            draw(tree, depth+1, n.se, doc);
+            draw(tree, depth+1, n.se, doc, color, rainbow);
         }
 
         // draw box
@@ -196,7 +200,9 @@ namespace vptree
         int node, 
         const Cell& cell,
         std::vector<svg::CavcPoly::Edge> &edgeBuffer, 
-        svg::Document& doc
+        svg::Document& doc, 
+        svg::Color color = svg::Color(255,76,23), 
+        bool rainbow = true
     )
     {
         if(node < 0) return;
@@ -207,8 +213,9 @@ namespace vptree
         double cx = tree.points[n.id][0];
         double cy = tree.points[n.id][1];
         
-        // hue rotated color 
-        svg::Color color = rotate(svg::Color(255,120,80), depth*30);
+        // hue rotated color
+        if( rainbow ) 
+            color = rotate(color, depth*30);
         // std::cout << "depth: " << depth << " " << node << " " << n.left << " " << n.right << std::endl;
         // std::cout << "circle: " << cx << " " << cy << " " << radius << std::endl;
 
@@ -316,10 +323,10 @@ namespace vptree
             doc << svg::Circle(svg::Point(cx, cy), 4, svg::Fill(color), svg::Stroke());
 
             // draw left subtree
-            draw(tree, depth+1, n.left, inside, edgeBuffer, doc);
+            draw(tree, depth+1, n.left, inside, edgeBuffer, doc, color, rainbow);
 
             // draw right subtree
-            draw(tree, depth+1, n.right, outside, edgeBuffer, doc);
+            draw(tree, depth+1, n.right, outside, edgeBuffer, doc, color, rainbow);
 
             // draw left cell (inside)
             for(int i = 0; i < (int)inside.shape.size(); ++i)
@@ -350,7 +357,9 @@ namespace bvptree
         int node, 
         const Cell& cell,
         std::vector<svg::CavcPoly::Edge> &edgeBuffer, 
-        svg::Document& doc
+        svg::Document& doc, 
+        svg::Color color = svg::Color(255,76,23), 
+        bool rainbow = true
     )
     {
         if(node < 0) return;
@@ -361,8 +370,10 @@ namespace bvptree
         double cx = tree.points[n.id][0];
         double cy = tree.points[n.id][1];
         
-        // hue rotated color 
-        svg::Color color = rotate(svg::Color(255,120,80), depth*30);
+        // hue rotated color
+        if( rainbow ) 
+            color = rotate(color, depth*30);
+
         // std::cout << "depth: " << depth << " " << node << " " << n.left << " " << n.right << std::endl;
         // std::cout << "circle: " << cx << " " << cy << " " << radius << std::endl;
 
@@ -379,9 +390,11 @@ namespace bvptree
             cavc::Polyline<double> bball;
             geo::Point p(cx, cy);
             float tau = radius;
-            std::vector<geo::Point> v = geo::ball(p, tau, geo::BregmanKL());
-            if( v.empty() ) return;
-            std::vector<geo::Point> hull = geo::hull(v);
+            // std::vector<geo::Point> v = geo::ball(p, tau, geo::BregmanKL());
+            // if( v.empty() ) return;
+            // std::vector<geo::Point> hull = geo::hull(v);
+
+            std::vector<geo::Point> hull = geo::klball(p, tau);
             for(const auto& p : hull)
                 bball.addVertex(p.x, p.y, 0);
             bball.isClosed() = true;
@@ -474,12 +487,6 @@ namespace bvptree
             // draw circle center
             doc << svg::Circle(svg::Point(cx, cy), 4, svg::Fill(color), svg::Stroke());
 
-            // draw left subtree
-            draw(tree, depth+1, n.left, inside, edgeBuffer, doc);
-
-            // draw right subtree
-            draw(tree, depth+1, n.right, outside, edgeBuffer, doc);
-
             // draw left cell (inside)
             for(int i = 0; i < (int)inside.shape.size(); ++i)
             {
@@ -491,6 +498,12 @@ namespace bvptree
             {
                 doc << svg::CavcPoly(outside.shape[i], svg::Fill(), edgeBuffer, svg::Stroke(2, color));
             }    
+            
+            // draw left subtree
+            draw(tree, depth+1, n.left, inside, edgeBuffer, doc, color, rainbow);
+
+            // draw right subtree
+            draw(tree, depth+1, n.right, outside, edgeBuffer, doc, color, rainbow);
         }
     }
 }

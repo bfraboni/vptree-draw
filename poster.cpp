@@ -88,9 +88,20 @@ void initsquare(int dx, int dy, std::vector<geo::Point>& points)
 
 int main(void)
 {   
+    // color params
+    // const svg::Color bgcolor(255,255,255);      // backgournd
+    // const svg::Color treecolor(255,120,80);     // base color for the tree cells
+    // const bool rainbow = true;                  // hue rotate colors at each level if true
+    // const svg::Color bgcolor(255,255,255);   // backgournd
+    // const svg::Color treecolor(35,35,35);    // base color for the tree cells
+    // const bool rainbow = false;               // hue rotate colors at each level if true
+    const svg::Color bgcolor(0,0,0);         // backgournd
+    const svg::Color treecolor(235,235,235); // base color for the tree cells
+    const bool rainbow = false;               // hue rotate colors at each level if true
+
     svg::Dimensions dimensions(4000, 5000);
     svg::Layout layout(dimensions, svg::Layout::BottomLeft);
-    svg::Polygon bg(svg::Fill(svg::Color(255, 255, 255)), svg::Stroke());
+    svg::Polygon bg((svg::Fill(bgcolor)), svg::Stroke());
     bg << svg::Point(0, 0) << svg::Point(dimensions.width, 0) << svg::Point(dimensions.width, dimensions.height) << svg::Point(0, dimensions.height);
     svg::Document doc("poster.svg", layout);
     doc << bg;
@@ -107,25 +118,25 @@ int main(void)
         for(int i = 0; i < (int)v.size(); ++i)
             vcpy[i] = v[i]+offset;
         bvhsphere::Tree t1(vcpy);
-        bvhsphere::draw(t1, 0, t1.root, doc);
+        bvhsphere::draw(t1, 0, t1.root, doc, treecolor, rainbow);
         // bunny bvh box
         offset = geo::Point(100,1100);
         for(int i = 0; i < (int)v.size(); ++i)
             vcpy[i] = v[i]+offset;
         bvhbox::Tree t2(vcpy);
-        bvhbox::draw(t2, 0, t2.root, doc);
+        bvhbox::draw(t2, 0, t2.root, doc, treecolor, rainbow);
         // bunny kd tree
         offset = geo::Point(100,2100);
         for(int i = 0; i < (int)v.size(); ++i)
             vcpy[i] = v[i]+offset;
         kdtree::Tree t3(vcpy);
-        kdtree::draw(t3, 0, t3.root, geo::Point(100,2100), geo::Point(900, 2900), doc);
+        kdtree::draw(t3, 0, t3.root, geo::Point(100,2100), geo::Point(900, 2900), doc, treecolor, rainbow);
         // bunny quad tree
         offset = geo::Point(100,3100);
         for(int i = 0; i < (int)v.size(); ++i)
             vcpy[i] = v[i]+offset;
         quadtree::Tree t4(vcpy, geo::Box(geo::Point(100,3100), geo::Point(900,3900)));
-        quadtree::draw(t4, 0, t4.root, doc);
+        quadtree::draw(t4, 0, t4.root, doc, treecolor, rainbow);
         // bunny vp tree
         offset = geo::Point(100,4100);
         for(int i = 0; i < (int)v.size(); ++i)
@@ -140,7 +151,7 @@ int main(void)
         vptree::Cell cell;
         cell.shape.push_back(bounds);
         std::vector<svg::CavcPoly::Edge> buffer;
-        vptree::draw(t5, 0, t5.root, cell, buffer, doc);
+        vptree::draw(t5, 0, t5.root, cell, buffer, doc, treecolor, rainbow);
     }
     
     if( 1 )
@@ -155,25 +166,25 @@ int main(void)
         for(int i = 0; i < (int)v.size(); ++i)
             vcpy[i] = v[i]+offset;
         bvhsphere::Tree t1(vcpy);
-        bvhsphere::draw(t1, 0, t1.root, doc);
+        bvhsphere::draw(t1, 0, t1.root, doc, treecolor, rainbow);
         // line bvh box
         offset = geo::Point(1100,1100);
         for(int i = 0; i < (int)v.size(); ++i)
             vcpy[i] = v[i]+offset;
         bvhbox::Tree t2(vcpy);
-        bvhbox::draw(t2, 0, t2.root, doc);
+        bvhbox::draw(t2, 0, t2.root, doc, treecolor, rainbow);
         // line kd tree
         offset = geo::Point(1100,2100);
         for(int i = 0; i < (int)v.size(); ++i)
             vcpy[i] = v[i]+offset;
         kdtree::Tree t3(vcpy);
-        kdtree::draw(t3, 0, t3.root, geo::Point(1100,2100), geo::Point(1900, 2900), doc);
+        kdtree::draw(t3, 0, t3.root, geo::Point(1100,2100), geo::Point(1900, 2900), doc, treecolor, rainbow);
         // line quad tree
         offset = geo::Point(1100,3100);
         for(int i = 0; i < (int)v.size(); ++i)
             vcpy[i] = v[i]+offset;
         quadtree::Tree t4(vcpy, geo::Box(geo::Point(1100,3100), geo::Point(1900,3900)));
-        quadtree::draw(t4, 0, t4.root, doc);
+        quadtree::draw(t4, 0, t4.root, doc, treecolor, rainbow);
         // line vp tree
         offset = geo::Point(1100,4100);
         for(int i = 0; i < (int)v.size(); ++i)
@@ -188,7 +199,7 @@ int main(void)
         vptree::Cell cell;
         cell.shape.push_back(bounds);
         std::vector<svg::CavcPoly::Edge> buffer;
-        vptree::draw(t5, 0, t5.root, cell, buffer, doc);
+        vptree::draw(t5, 0, t5.root, cell, buffer, doc, treecolor, rainbow);
     }
     
     if( 1 )
@@ -203,25 +214,25 @@ int main(void)
         for(int i = 0; i < (int)v.size(); ++i)
             vcpy[i] = v[i]+offset;
         bvhsphere::Tree t1(vcpy);
-        bvhsphere::draw(t1, 0, t1.root, doc);
+        bvhsphere::draw(t1, 0, t1.root, doc, treecolor, rainbow);
         // squares bvh box
         offset = geo::Point(2100,1100);
         for(int i = 0; i < (int)v.size(); ++i)
             vcpy[i] = v[i]+offset;
         bvhbox::Tree t2(vcpy);
-        bvhbox::draw(t2, 0, t2.root, doc);
+        bvhbox::draw(t2, 0, t2.root, doc, treecolor, rainbow);
         // squares kd tree
         offset = geo::Point(2100,2100);
         for(int i = 0; i < (int)v.size(); ++i)
             vcpy[i] = v[i]+offset;
         kdtree::Tree t3(vcpy);
-        kdtree::draw(t3, 0, t3.root, geo::Point(2100,2100), geo::Point(2900, 2900), doc);
+        kdtree::draw(t3, 0, t3.root, geo::Point(2100,2100), geo::Point(2900, 2900), doc, treecolor, rainbow);
         // squares quad tree
         offset = geo::Point(2100,3100);
         for(int i = 0; i < (int)v.size(); ++i)
             vcpy[i] = v[i]+offset;
         quadtree::Tree t4(vcpy, geo::Box(geo::Point(2100,3100), geo::Point(2900,3900)));
-        quadtree::draw(t4, 0, t4.root, doc);
+        quadtree::draw(t4, 0, t4.root, doc, treecolor, rainbow);
         // squares vp tree
         offset = geo::Point(2100,4100);
         for(int i = 0; i < (int)v.size(); ++i)
@@ -236,7 +247,7 @@ int main(void)
         vptree::Cell cell;
         cell.shape.push_back(bounds);
         std::vector<svg::CavcPoly::Edge> buffer;
-        vptree::draw(t5, 0, t5.root, cell, buffer, doc);
+        vptree::draw(t5, 0, t5.root, cell, buffer, doc, treecolor, rainbow);
     }
     
     if( 1 )
@@ -251,25 +262,25 @@ int main(void)
         for(int i = 0; i < (int)v.size(); ++i)
             vcpy[i] = v[i]+offset;
         bvhsphere::Tree t1(vcpy);
-        bvhsphere::draw(t1, 0, t1.root, doc);
+        bvhsphere::draw(t1, 0, t1.root, doc, treecolor, rainbow);
         // gaussian bvh box
         offset = geo::Point(3100,1100);
         for(int i = 0; i < (int)v.size(); ++i)
             vcpy[i] = v[i]+offset;
         bvhbox::Tree t2(vcpy);
-        bvhbox::draw(t2, 0, t2.root, doc);
+        bvhbox::draw(t2, 0, t2.root, doc, treecolor, rainbow);
         // gaussian kd tree
         offset = geo::Point(3100,2100);
         for(int i = 0; i < (int)v.size(); ++i)
             vcpy[i] = v[i]+offset;
         kdtree::Tree t3(vcpy);
-        kdtree::draw(t3, 0, t3.root, geo::Point(3100,2100), geo::Point(3900, 2900), doc);
+        kdtree::draw(t3, 0, t3.root, geo::Point(3100,2100), geo::Point(3900, 2900), doc, treecolor, rainbow);
         // gaussian quad tree
         offset = geo::Point(3100,3100);
         for(int i = 0; i < (int)v.size(); ++i)
             vcpy[i] = v[i]+offset;
         quadtree::Tree t4(vcpy, geo::Box(geo::Point(3100,3100), geo::Point(3900,3900)));
-        quadtree::draw(t4, 0, t4.root, doc);
+        quadtree::draw(t4, 0, t4.root, doc, treecolor, rainbow);
         // gaussian vp tree
         offset = geo::Point(3100,4100);
         for(int i = 0; i < (int)v.size(); ++i)
@@ -284,7 +295,7 @@ int main(void)
         vptree::Cell cell;
         cell.shape.push_back(bounds);
         std::vector<svg::CavcPoly::Edge> buffer;
-        vptree::draw(t5, 0, t5.root, cell, buffer, doc);
+        vptree::draw(t5, 0, t5.root, cell, buffer, doc, treecolor, rainbow);
     }
     doc.save();
 

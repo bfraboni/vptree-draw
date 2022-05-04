@@ -24,8 +24,8 @@ int main(int argc, char * argv[])
     bg << svg::Point(0, 0) << svg::Point(dimensions.width, 0) << svg::Point(dimensions.width, dimensions.height) << svg::Point(0, dimensions.height);
 
     // bregman ball size
-    geo::Point c(4*dx/3, dy/3);
-    float tau = 50.f;
+    geo::Point c(200, 200);
+    float tau = 200.f;
     if( argc > 1 )
     {
         tau = std::atof(argv[3]);
@@ -40,8 +40,9 @@ int main(int argc, char * argv[])
         svg::Polygon poly(svg::Fill(), svg::Stroke(1, svg::Color(0,0,0))); 
         for(auto p : hull)
             poly << svg::Point(p.x, p.y);
-    
+
         svg::Document doc("klball-old.svg", layout);
+    
         doc << bg;
         doc << poly;
         doc.save();
@@ -64,6 +65,7 @@ int main(int argc, char * argv[])
 
     int nbx = 3, nby = 3, nbr = 4;
     // old version
+    if(1)
     {
         svg::Document doc("klball-old-demo.svg", layout);
         doc << bg;
@@ -88,6 +90,7 @@ int main(int argc, char * argv[])
     }
 
     // new version
+    if(1)
     {
         svg::Document doc("klball-new-demo.svg", layout);
         doc << bg;
