@@ -103,12 +103,15 @@ void initrandom(int dx, int dy, std::vector<geo::Point>& points)
 int main(void)
 {   
     // color params
-    const svg::Color bgcolor(255,255,255);      // backgournd
-    const svg::Color treecolor(255,76,23);      // base color for the tree cells
-    const bool rainbow = true;                  // hue rotate colors at each level if true
+    // const svg::Color bgcolor(255,255,255);      // backgournd
+    // const svg::Color treecolor(255,76,23);      // base color for the tree cells
+    // const bool rainbow = true;                  // hue rotate colors at each level if true
     // const svg::Color bgcolor(255,255,255);   // backgournd
     // const svg::Color treecolor(35,35,35);    // base color for the tree cells
     // const bool rainbow = true;               // hue rotate colors at each level if true
+    const svg::Color bgcolor(0,0,0);         // backgournd
+    const svg::Color treecolor(235,120,70); // base color for the tree cells
+    const bool rainbow = true;              // hue rotate colors at each level if true
 
     int dx = 1000, dy = 1000;
     svg::Dimensions dimensions(dx, dy);
@@ -172,6 +175,7 @@ int main(void)
 
     // bregman vp tree
     // now robust using Frank Nielsen's parametric form of Bregman balls
+    // works withc clang++ compiler, infinite loop or bug with g++
     if( 1 )
     {
         svg::Document d6("bvptree.svg", layout);
