@@ -39,11 +39,11 @@ the build binaries.
 
 ## Examples
 
-|VP tree| BVH box |BVH sphere|
+|Vantage points tree| Quadtree | KD tree |
 |:---:|:---:|:---:|
 | ![](data/vptree.svg) | ![](data/quadtree.svg) | ![](data/kdtree.svg) |
 
-|BVP tree|BVH box |BVH sphere|
+|Bregman vantage points tree|Bounding box hierarchy |Bounding sphere hierarchy|
 |:---:|:---:|:---:|
 | ![](data/bvptree.svg) | ![](data/bvhbox.svg) | ![](data/bvhsphere.svg) |
 
