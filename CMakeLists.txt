@@ -1,8 +1,10 @@
 project(vptree-draw)
 cmake_minimum_required(VERSION 3.11)
 
-add_executable(poster poster)
-add_executable(compare compare)
+add_subdirectory(src)
+
+add_executable(poster src/poster.cpp)
+add_executable(compare src/compare.cpp)
 
 target_compile_features(poster PRIVATE cxx_std_17)
 target_include_directories(poster PUBLIC

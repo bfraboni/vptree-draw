@@ -5,15 +5,17 @@ SVG export of several 2D space partitioning structures.
 
 ## Code structure
 
-- `geo.h` minimalist 2D geometry structures (Point, Vector, Box, Sphere)
-- `bvhsphere.h` minimalist bounding sphere hierarchy
-- `bvhbox.h` minimalist bounding box hierarchy
-- `kdtree.h` minimalist kd tree
-- `quadtree.h` minimalist quadtree
-- `vptree.h` minimalist vantage points tree
-- `bvptree.h` minimalist Bregman Kullback-Leibler vantage points tree
-- `draw.h` tree to SVG draw functions 
-- `simple_svg_extend.h` extends Simple SVG to support arcs and cavc::PolyLine (aka: bulge paths)
+- `src/geo.h` minimalist 2D geometry structures (Point, Vector, Box, Sphere)
+- `src/bvhsphere.h` minimalist bounding sphere hierarchy
+- `src/bvhbox.h` minimalist bounding box hierarchy
+- `src/kdtree.h` minimalist kd tree
+- `src/quadtree.h` minimalist quadtree
+- `src/vptree.h` minimalist vantage points tree
+- `src/bvptree.h` minimalist Bregman Kullback-Leibler vantage points tree
+- `src/bregman.h` minimalist utility functions for plotting Bregman balls
+- `src/lambert.h` minimalist Lambert W function implementation for parametric Bregman balls (warning: this may be numerically unstable)
+- `src/draw.h` tree to SVG draw functions 
+- `src/simple_svg_extend.h` extends Simple SVG to support arcs and cavc::PolyLine (aka: bulge paths)
 
 ## Dependencies 
 (included in this project)
@@ -37,13 +39,17 @@ the build binaries.
 
 ## Examples
 
-|VP tree|Quadtree|KD tree|BVH box |BVH sphere|
-|:---:|:---:|:---:|:---:|:---:|
-| ![](data/vptree.svg) | ![](data/quadtree.svg) | ![](data/kdtree.svg) | ![](data/bvhbox.svg) | ![](data/bvhsphere.svg) |
+|VP tree| BVH box |BVH sphere|
+|:---:|:---:|:---:|
+| ![](data/vptree.svg) | ![](data/quadtree.svg) | ![](data/kdtree.svg) |
+
+|BVP tree|BVH box |BVH sphere|
+|:---:|:---:|:---:|
+| ![](data/bvptree.svg) | ![](data/bvhbox.svg) | ![](data/bvhsphere.svg) |
 
 |Large poster|
 |:---:|
-|![](data/poster.svg)|
+|![](data/posterbw.svg)|
 
 ## Contributors
 
