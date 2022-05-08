@@ -51,6 +51,12 @@ the build binaries.
 |:---:|
 |![](data/posterbw.svg)|
 
+|Bregman VPT Kullback-Leibler divergence |Bregman VPT Itakura-Saito divergence |
+|:---:|:---:|
+| ![](data/bvptree.svg) | ![](data/bvptreeis.svg) |
+
+
+
 ## Contributors
 
 Basile Fraboni, LIRIS, INSA Lyon, Université Claude Bernard Lyon 1
