@@ -351,15 +351,17 @@ namespace bvptree
         std::vector<cavc::Polyline<double>> holes;
     };
 
+    template<typename div_t>
     void draw(
-        const bvptree::Tree& tree, 
+        const bvptree::Tree<div_t>& tree, 
         int depth, 
         int node, 
         const Cell& cell,
         std::vector<svg::CavcPoly::Edge> &edgeBuffer, 
         svg::Document& doc, 
         svg::Color color = svg::Color(255,76,23), 
-        bool rainbow = true
+        bool rainbow = true,
+        int linesize = 4
     )
     {
         if(node < 0) return;
@@ -381,7 +383,7 @@ namespace bvptree
         if( radius <= 0 )
         {
             // draw vantage point
-            doc << svg::Circle(svg::Point(cx, cy), 4, svg::Fill(color), svg::Stroke());
+            doc << svg::Circle(svg::Point(cx, cy), linesize, svg::Fill(color), svg::Stroke());
         }
         // on a node
         else
@@ -390,11 +392,11 @@ namespace bvptree
             cavc::Polyline<double> bball;
             geo::Point p(cx, cy);
             float tau = radius;
-            // std::vector<geo::Point> v = geo::ball(p, tau, geo::BregmanKL());
+            // std::vector<geo::Point> v = geo::ball(p, tau);
             // if( v.empty() ) return;
             // std::vector<geo::Point> hull = geo::hull(v);
 
-            std::vector<geo::Point> hull = geo::klball(p, tau);
+            std::vector<geo::Point> hull = typeid(div_t) == typeid(geo::BregmanKL) ? geo::klball(p, tau) : geo::isball(p, tau);
             for(const auto& p : hull)
                 bball.addVertex(p.x, p.y, 0);
             bball.isClosed() = true;
@@ -485,25 +487,25 @@ namespace bvptree
             }
 
             // draw circle center
-            doc << svg::Circle(svg::Point(cx, cy), 4, svg::Fill(color), svg::Stroke());
+            doc << svg::Circle(svg::Point(cx, cy), linesize, svg::Fill(color), svg::Stroke());
 
             // draw left cell (inside)
             for(int i = 0; i < (int)inside.shape.size(); ++i)
             {
-                doc << svg::CavcPoly(inside.shape[i], svg::Fill(), edgeBuffer, svg::Stroke(2, color));
+                doc << svg::CavcPoly(inside.shape[i], svg::Fill(), edgeBuffer, svg::Stroke(linesize, color));
             }
 
             // draw right cell (outside)
             for(int i = 0; i < (int)outside.shape.size(); ++i)
             {
-                doc << svg::CavcPoly(outside.shape[i], svg::Fill(), edgeBuffer, svg::Stroke(2, color));
+                doc << svg::CavcPoly(outside.shape[i], svg::Fill(), edgeBuffer, svg::Stroke(linesize, color));
             }    
             
             // draw left subtree
-            draw(tree, depth+1, n.left, inside, edgeBuffer, doc, color, rainbow);
+            draw(tree, depth+1, n.left, inside, edgeBuffer, doc, color, rainbow, linesize);
 
             // draw right subtree
-            draw(tree, depth+1, n.right, outside, edgeBuffer, doc, color, rainbow);
+            draw(tree, depth+1, n.right, outside, edgeBuffer, doc, color, rainbow, linesize);
         }
     }
 }

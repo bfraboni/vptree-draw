@@ -34,7 +34,7 @@ int main(int argc, char * argv[])
     // old version
     if(0)
     {
-        std::vector<geo::Point> vold = geo::ball(c, tau, geo::BregmanKL());
+        std::vector<geo::Point> vold = geo::ball(c, tau);
         std::vector<geo::Point> hull = geo::hull(vold);
     
         svg::Polygon poly(svg::Fill(), svg::Stroke(1, svg::Color(0,0,0))); 
@@ -76,7 +76,7 @@ int main(int argc, char * argv[])
         {
             geo::Point c((i+0.5f)*dx/float(nbx),(j+0.5f)*dy/float(nby));
             float tau = (k+1)*25;
-            vold = geo::ball(c, tau, geo::BregmanKL());
+            vold = geo::ball(c, tau);
             hull = geo::hull(vold);
 
             svg::Color color = rotate(svg::Color(255,120,80), dx*(k+1.f)/10.f);

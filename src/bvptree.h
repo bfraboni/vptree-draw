@@ -21,11 +21,10 @@ namespace bvptree
         int right;
     };
 
+    template<typename Divergence = geo::BregmanKL>
     class Tree
     {
     public:
-
-
         std::vector<geo::Point> points;
         std::vector<Node> nodes;
         int root;
@@ -52,15 +51,16 @@ namespace bvptree
             std::swap(points[begin], points[uni(rng)]);
 
             geo::Point p = points[begin];
-            auto compare = [&p](const geo::Point& a, const geo::Point& b) 
+            Divergence div;
+            auto compare = [&p, &div](const geo::Point& a, const geo::Point& b) 
             {
-                return geo::bregmanKL(p, a) < geo::bregmanKL(p, b);
+                return div(p, a) < div(p, b);
             };
 
             int mid = (end + begin) / 2;
             std::nth_element( points.data() + begin+1, points.data() + mid, points.data() + end, compare);
 
-            double r = geo::bregmanKL(p, points[mid]);          
+            double r = div(p, points[mid]);          
             int left = build(begin+1, mid);
             int right = build(mid, end);  
 

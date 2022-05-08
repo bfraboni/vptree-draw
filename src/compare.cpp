@@ -105,11 +105,10 @@ int main(void)
     // color params
     // const svg::Color bgcolor(255,255,255);      // backgournd
     // const svg::Color treecolor(255,76,23);      // base color for the tree cells
-    // const bool rainbow = true;                  // hue rotate colors at each level if true
     // const svg::Color bgcolor(255,255,255);   // backgournd
     // const svg::Color treecolor(35,35,35);    // base color for the tree cells
-    // const bool rainbow = true;               // hue rotate colors at each level if true
     const svg::Color bgcolor(0,0,0);         // backgournd
+    // const svg::Color treecolor(255,255,255); // base color for the tree cells
     const svg::Color treecolor(235,120,70); // base color for the tree cells
     const bool rainbow = true;              // hue rotate colors at each level if true
 
@@ -180,13 +179,26 @@ int main(void)
     {
         svg::Document d6("bvptree.svg", layout);
         d6 << bg;
-        bvptree::Tree bvp(v);
+        bvptree::Tree<geo::BregmanKL> bvp(v);
         bvptree::Cell bcell;
         bcell.shape.push_back(bounds);
         // init edge structure
         buffer.clear();
-        bvptree::draw(bvp, 0, bvp.root, bcell, buffer, d6, treecolor, rainbow);
+        bvptree::draw(bvp, 0, bvp.root, bcell, buffer, d6, treecolor, rainbow, 2);
         d6.save();
+    }
+
+    if( 1 )
+    {
+        svg::Document d7("bvptreeis.svg", layout);
+        d7 << bg;
+        bvptree::Tree<geo::BregmanIS> bvp(v);
+        bvptree::Cell bcell;
+        bcell.shape.push_back(bounds);
+        // init edge structure
+        buffer.clear();
+        bvptree::draw(bvp, 0, bvp.root, bcell, buffer, d7, treecolor, rainbow, 2);
+        d7.save();
     }
 
     return 0;

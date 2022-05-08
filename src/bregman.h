@@ -17,7 +17,7 @@ namespace geo
     std::vector<geo::Point> klball(const geo::Point& p, const float tau, const int nb = 250)
     {
         std::vector<geo::Point> output(nb*4);
-        float du=tau/(float)nb;
+        float du=tau/(float)(nb-1);
 
         // parametric: x1, y1, x2, y2
         // x1=-p.x*func::LambertW0(-std::exp(-u/p.x-1));
@@ -26,33 +26,33 @@ namespace geo
         // y2=-p.y*func::LambertWm1(-std::exp(-(tau-u)/p.y-1));
         
         // top left quadrant: (x1, y2)
-        for (int i=0; i<=nb; ++i)
+        for (int i=0; i<nb; ++i)
         {
-            float u = tau-i * du;
+            float u = tau-(i+0.5f) * du;
             float x=-p.x*func::LambertW0(-std::exp(-u/p.x-1));
             float y=-p.y*func::LambertWm1(-std::exp(-(tau-u)/p.y-1));
             output[i] = geo::Point(x,y);
         }
         // top right quadrant: (x2, y2)
-        for (int i=0; i<=nb; ++i)
+        for (int i=0; i<nb; ++i)
         {
-            float u = i * du;
+            float u = (i+0.5f) * du;
             float x=-p.x*func::LambertWm1(-std::exp(-u/p.x-1));
             float y=-p.y*func::LambertWm1(-std::exp(-(tau-u)/p.y-1));
             output[nb+i] = geo::Point(x,y);
         }
         // bottom right quadrant: (x2, y1)
-        for (int i=0; i<=nb; ++i)
+        for (int i=0; i<nb; ++i)
         {
-            float u = tau-i * du;
+            float u = tau-(i+0.5f) * du;
             float x=-p.x*func::LambertWm1(-std::exp(-u/p.x-1));
             float y=-p.y*func::LambertW0(-std::exp(-(tau-u)/p.y-1));
             output[2*nb+i] = geo::Point(x,y);
         }
         // bottom left quadrant: (x1, y1)
-        for (int i=0; i<=nb; ++i)
+        for (int i=0; i<nb; ++i)
         {
-            float u = i * du;
+            float u = (i+0.5f) * du;
             float x=-p.x*func::LambertW0(-std::exp(-u/p.x-1));
             float y=-p.y*func::LambertW0(-std::exp(-(tau-u)/p.y-1));
             output[3*nb+i] = geo::Point(x,y);
@@ -60,9 +60,57 @@ namespace geo
         
         return output;
     }
+
+    // Frank Nielsen's parametric version of IS-balls
+    std::vector<geo::Point> isball(const geo::Point& p, const float tau, const int nb = 250)
+    {
+        std::vector<geo::Point> output(nb*4);
+        float du=tau/(float)(nb-1);
+
+        // parametric: x1, y1, x2, y2
+        // x1=-p.x/func::LambertWm1(-std::exp(-u-1));
+        // y1=-p.y/func::LambertWm1(-std::exp(-(tau-u)-1));
+        // x2=-p.x/func::LambertW0(-std::exp(-u-1));
+        // y2=-p.y/func::LambertW0(-std::exp(-(tau-u)-1));
+        
+        // top left quadrant: (x1, y2)
+        for (int i=0; i<nb; ++i)
+        {
+            float u = tau-(i+0.5) * du;
+            float x=-p.x/func::LambertWm1(-std::exp(-u-1));
+            float y=-p.y/func::LambertW0(-std::exp(-(tau-u)-1));
+            output[i] = geo::Point(x,y);
+        }
+        // top right quadrant: (x2, y2)
+        for (int i=0; i<nb; ++i)
+        {
+            float u = (i+0.5) * du;
+            float x=-p.x/func::LambertW0(-std::exp(-u-1));
+            float y=-p.y/func::LambertW0(-std::exp(-(tau-u)-1));
+            output[nb+i] = geo::Point(x,y);
+        }
+        // bottom right quadrant: (x2, y1)
+        for (int i=0; i<nb; ++i)
+        {
+            float u = tau-(i+0.5) * du;
+            float x=-p.x/func::LambertW0(-std::exp(-u-1));
+            float y=-p.y/func::LambertWm1(-std::exp(-(tau-u)-1));
+            output[2*nb+i] = geo::Point(x,y);
+        }
+        // bottom left quadrant: (x1, y1)
+        for (int i=0; i<nb; ++i)
+        {
+            float u = (i+0.5) * du;
+            float x=-p.x/func::LambertWm1(-std::exp(-u-1));
+            float y=-p.y/func::LambertWm1(-std::exp(-(tau-u)-1));
+            output[3*nb+i] = geo::Point(x,y);
+        }
+        
+        return output;
+    }
 }
 
-// old "handmade" Bregman KL ball parametric contour
+// old "handmade" Bregman ball parametric contour
 // 1- grid marching + bisection + interpolation to get unordered points on the contour
 // 2- convex hull construction to get the final contour
 // expensive computations
@@ -77,7 +125,20 @@ namespace geo
     {
         float operator()(const geo::Point& a, const geo::Point & b) const
         {
-            return a.x*std::log(a.x/b.x)+a.y*std::log(a.y/b.y)+b.x-a.x+b.y-a.y;
+            return bregmanKL(a,b);
+        }
+    };
+
+    static float bregmanIS(const geo::Point& a, const geo::Point & b)
+    {
+        return a.x/b.x-std::log(a.x/b.x)+a.y/b.y-std::log(a.y/b.y)-2;
+    }
+    
+    struct BregmanIS
+    {
+        float operator()(const geo::Point& a, const geo::Point & b) const
+        {
+            return bregmanIS(a,b);
         }
     };
 
@@ -85,9 +146,10 @@ namespace geo
     // - grid marching + bisection + interpolation 
     // - largely more robust with bisection method + final interpolation than interpolation only
     // - care with the bregman KL non symmetry
-    template<typename Divergence>
-    std::vector<Point> ball(const geo::Point& p, float tau, Divergence d)
+    template<typename Divergence = geo::BregmanKL>
+    std::vector<Point> ball(const geo::Point& p, float tau)
     {
+        Divergence d;
         int grid = 4000;
         float size = std::max(100.f,1000 * std::log(tau));
         std::vector<geo::Point> v;
